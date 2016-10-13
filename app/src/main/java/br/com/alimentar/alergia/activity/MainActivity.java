@@ -19,6 +19,7 @@ import br.com.alimentar.alergia.utils.AndroidUtils;
 public class MainActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    //testando git
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
