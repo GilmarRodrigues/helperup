@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.model.Substancia;
 import br.com.alimentar.alergia.model.Tabelas;
 
+import static com.google.android.gms.common.api.Status.su;
+
 /**
  * Created by gilmar on 28/09/16.
  */
@@ -24,11 +27,11 @@ public class SubstanciasAdapter extends BaseAdapter {
     private List<Substancia> substancias = Tabelas.SUBSTANCIAS;
     private Context mContext;
     private LayoutInflater mInflater;
-    private onClickCheckBox onClickCheckBox;
+    private OnClickSwitch onClickSwitch;
 
-    public SubstanciasAdapter(Context context, onClickCheckBox onClickCheckBox) {
+    public SubstanciasAdapter(Context context, OnClickSwitch onClickSwitch) {
         this.mContext = context;
-        this.onClickCheckBox = onClickCheckBox;
+        this.onClickSwitch = onClickSwitch;
         this.mInflater = LayoutInflater.from(context);
     }
 
@@ -57,7 +60,7 @@ public class SubstanciasAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.textSubstancia = (TextView) view.findViewById(R.id.text_substancia);
-            holder.checkSubstancia = (CheckBox) view.findViewById(R.id.ckek_substancia);
+            holder.switchSubstancia = (Switch) view.findViewById(R.id.switch_substancia);
 
             view.setTag(holder);
         } else {
@@ -65,18 +68,19 @@ public class SubstanciasAdapter extends BaseAdapter {
         }
 
         holder.textSubstancia.setText(substancias.get(position).nome);
-        boolean checked = holder.checkSubstancia.isChecked();
+
+        //boolean checked = holder.checkSubstancia.isChecked();
         if (substancias.get(position).status.equals(Tabelas.CONTEM)) {
-            holder.checkSubstancia.setChecked(true);
+            holder.switchSubstancia.setChecked(true);
         } else {
-            holder.checkSubstancia.setChecked(false);
+            holder.switchSubstancia.setChecked(false);
         }
 
-        if(onClickCheckBox != null) {
-            holder.checkSubstancia.setOnClickListener(new View.OnClickListener() {
+        if(onClickSwitch != null) {
+            holder.switchSubstancia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onClickCheckBox.onClick(view, position);
+                    onClickSwitch.onClick(view, position);
                 }
             });
         }
@@ -86,10 +90,10 @@ public class SubstanciasAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView textSubstancia;
-        CheckBox checkSubstancia;
+        Switch switchSubstancia;
     }
 
-    public interface onClickCheckBox {
+    public interface OnClickSwitch {
         public void onClick(View view, int position);
     }
 }

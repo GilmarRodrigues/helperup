@@ -18,8 +18,8 @@
         android:textStyle="bold"
         android:layout_weight="1"/>
 
-    <CheckBox
-        android:id="@+id/ckek_substancia"
+    <Switch
+        android:id="@+id/switch_substancia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp" />

@@ -43,7 +43,7 @@ public class SubstanciasActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
     private ListView mListView;
-    private List<Substancia> mSubstanciasCheckBox = Tabelas.SUBSTANCIAS;
+    private List<Substancia> mSubstanciasSwitch = Tabelas.SUBSTANCIAS;
     private User mUser;
 
     @Override
@@ -58,7 +58,7 @@ public class SubstanciasActivity extends BaseActivity {
         mProgress = new ProgressDialog(this);
 
         mListView = (ListView) findViewById(R.id.list_view);
-        mListView.setAdapter(new SubstanciasAdapter(this, onClickCheckBox()));
+        mListView.setAdapter(new SubstanciasAdapter(this, onClickSwitch()));
 
         findViewById(R.id.salvar_btn).setOnClickListener(onClickSalvar());
         findViewById(R.id.pular_btn).setOnClickListener(onClickPular());
@@ -97,7 +97,7 @@ public class SubstanciasActivity extends BaseActivity {
     private void startSubstancia() {
         final String key = mAuth.getCurrentUser().getUid();
 
-        if (mSubstanciasCheckBox.size() > 0) {
+        if (mSubstanciasSwitch.size() > 0) {
             mProgress.setTitle(getString(R.string.aguarde));
             mProgress.setMessage(getString(R.string.realizando_cadastro));
             mProgress.show();
@@ -108,7 +108,7 @@ public class SubstanciasActivity extends BaseActivity {
                     User user = null;
                     if (dataSnapshot.hasChild(key)) {
                         if (mUser.imagem.equals("default")) {
-                            user = new User(mUser.nome, mUser.email, "default", mSubstanciasCheckBox);
+                            user = new User(mUser.nome, mUser.email, "default", mSubstanciasSwitch);
                             Map<String, Object> postValue = user.toMap();
                             Map<String, Object> childUpdates = new HashMap<String, Object>();
                             //Map<String, Object> hashtaghMap = new ObjectMapper().convertValue(childUpdates, Map.class);
@@ -118,7 +118,7 @@ public class SubstanciasActivity extends BaseActivity {
                     } else {
                         if (!mUser.imagem.equals("default")) {
                             DatabaseReference current_user_db = mDatabaseUser.child(key);
-                            user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasCheckBox);
+                            user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                             current_user_db.setValue(user);
                         }
                     }
@@ -139,14 +139,14 @@ public class SubstanciasActivity extends BaseActivity {
     }
 
 
-    private SubstanciasAdapter.onClickCheckBox onClickCheckBox() {
-        return new SubstanciasAdapter.onClickCheckBox() {
+    private SubstanciasAdapter.OnClickSwitch onClickSwitch() {
+        return new SubstanciasAdapter.OnClickSwitch() {
             @Override
             public void onClick(View view, int position) {
-                if (mSubstanciasCheckBox.get(position).status.equals(Tabelas.NAOCONTEM)) {
-                    mSubstanciasCheckBox.get(position).status = Tabelas.CONTEM;
+                if (mSubstanciasSwitch.get(position).status.equals(Tabelas.NAOCONTEM)) {
+                    mSubstanciasSwitch.get(position).status = Tabelas.CONTEM;
                 } else {
-                    mSubstanciasCheckBox.get(position).status = Tabelas.NAOCONTEM;
+                    mSubstanciasSwitch.get(position).status = Tabelas.NAOCONTEM;
                 }
             }
         };
