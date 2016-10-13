@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@color/primary">
+
+    <ImageView
+        android:id="@+id/img_pager_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mi_baseline"
+        android:adjustViewBounds="true"
+        android:gravity="center"
+        android:paddingLeft="?actionBarSize"
+        android:paddingRight="?actionBarSize"
+        tools:ignore="ContentDescription"
+        tools:src="@android:drawable/sym_action_call" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mi_baseline"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@android:color/white"
+        tools:ignore="UnusedAttribute"
+        android:text="Lorem ipsum" />
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mi_baseline"
+        android:layout_marginBottom="@dimen/mi_baseline"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textSize="15sp"
+
+        tools:ignore="UnusedAttribute"
+        android:textColor="@color/primary_light"
+        android:text="Lorem ipsum dolor sit amet, consectetur, adipisci velit, …" />
+
+</LinearLayout>

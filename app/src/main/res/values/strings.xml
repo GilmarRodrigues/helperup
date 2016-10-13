@@ -1,0 +1,69 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Alergia Alimentar</string>
+
+    <!-- Botões -->
+    <string name="btn_sign_in">ENTRAR</string>
+    <string name="btn_save">SALVAR</string>
+    <string name="btn_cadastrar">CADASTRAR</string>
+    <string name="btn_pular">PULAR</string>
+    <string name="btn_entre_com_google">ENTRAR COM GOOGLE</string>
+    <string name="btn_cadastrar_com_google">CADASTRAR-SE COM GOOGLE</string>
+    <string name="btn_login">FAZER LOGIN</string>
+    <string name="btn_cadastrar_se">CADASTRAR-SE</string>
+    <string name="btn_enviar">ENVIAR</string>
+
+    <!-- menu -->
+    <string name="action_profile">Perfil</string>
+    <string name="action_logout">Sair</string>
+    <string name="action_settings">Configurações</string>
+
+    <!-- mensagens -->
+    <string name="aguarde">Aguarde</string>
+    <string name="realizando_cadastro">Realizando Cadastro</string>
+    <string name="realizando_login">Realizando Login</string>
+    <string name="msg_checando_email">Checando email</string>
+    <string name="msg_enviar_email">Email enviado...</string>
+    <string name="msg_email_nao_cadastrado">Esse endereço de email, não foi cadastado.</string>
+
+    <!-- textos -->
+    <string name="text_cadastre_se">NÃO POSSUI UMA CONTA? CADASTRE-SE</string>
+    <string name="text_entre">Já possui uma conta? Entre</string>
+    <string name="text_subastancia_check_in">MARQUE AS SUBSTÂNCIA QUE VOCÊ NÃO PODE CONCUMIR.</string>
+    <string name="text_esqueceu_senha">Esqueceu sua senha?</string>
+    <string name="text_nome">Nome</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_senha">Senha</string>
+    <string name="text_sing_senha">Senha</string>
+    <string name="text_ou">ou</string>
+    <string name="text_recuperar_senha">Digite seu e-mail abaixo e enviaremos as instruções para redefinir a sua senha.</string>
+    <string name="text_termo_uso">Termos de uso</string>
+    <string name="text_politica_privatizacao">Política de privatização</string>
+
+    <!-- Titilos Telas -->
+    <string name="activity_login">Fazer login</string>
+    <string name="activity_register">Criar uma conta gratuita</string>
+    <string name="activity_profile">Perfil</string>
+    <string name="activity_substancias">Substâncias</string>
+    <string name="activity_recuperar_senha">Recuperar Senha</string>
+
+    <!-- validator -->
+    <string name="error_field_required">Este campo é obrigatório</string>
+    <string name="error_invalid_email">Este endereço de e-mail é inválido</string>
+    <string name="error_invalid_password">Esta senha é muito curta</string>
+    <string name="error_login_invalid">Email e senha inválido</string>
+    <string name="error_email_ja_cadastrado">Seu e-mail já está cadastrado. Use o botão "JÁ POSSUI UMA CONTA? ENTRE" abaixo.</string>
+
+
+    <!-- Intro -->
+    <string name="title_canteen_intro1" translatable="false">Menus right on your screen</string>
+    <string name="title_canteen_intro2" translatable="false">Cash on delivery</string>
+    <string name="title_canteen_intro3" translatable="false">Choose what you like</string>
+    <string name="title_canteen_intro4" translatable="false">Teste</string>
+    <string name="description_canteen_intro1" translatable="false">Looking for something to eat? Just browse the feed wherever you are.</string>
+    <string name="description_canteen_intro2" translatable="false">Order and we\'ll deliver the menu right in front of your door.</string>
+    <string name="description_canteen_intro3" translatable="false">Bookmark a menu you wanted to save and keep track of its status whether it\'s available or not.</string>
+    <string name="description_canteen_intro4" translatable="false">Bookmark a menu you wanted to save and keep track of its status whether it\'s available or not.</string>
+    <string name="label_button_cta_canteen_intro" translatable="false">Get started</string>
+
+</resources>
