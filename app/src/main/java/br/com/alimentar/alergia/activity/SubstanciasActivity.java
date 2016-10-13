@@ -43,7 +43,7 @@ public class SubstanciasActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
     private ListView mListView;
-    private List<Substancia> mSubstanciasSwitch = Tabelas.SUBSTANCIAS;
+    private List<Substancia> mSubstanciasSwitch;
     private User mUser;
 
     @Override
@@ -57,21 +57,22 @@ public class SubstanciasActivity extends BaseActivity {
 
         mProgress = new ProgressDialog(this);
 
+        mSubstanciasSwitch = Tabelas.addSubstancias(this);
+
         mListView = (ListView) findViewById(R.id.list_view);
-        mListView.setAdapter(new SubstanciasAdapter(this, onClickSwitch()));
+        mListView.setAdapter(new SubstanciasAdapter(this, onClickSwitch(), mSubstanciasSwitch));
 
         findViewById(R.id.salvar_btn).setOnClickListener(onClickSalvar());
         findViewById(R.id.pular_btn).setOnClickListener(onClickPular());
 
         mUser = getIntent().getParcelableExtra(User.KEY);
-
     }
 
     private View.OnClickListener onClickPular() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mUser.imagem.equals("default")) {
+                if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
                     final String key = mAuth.getCurrentUser().getUid();
                     DatabaseReference current_user_db = mDatabaseUser.child(key);
                     User user = new User(mUser.nome, mUser.email, mUser.imagem);
@@ -107,8 +108,8 @@ public class SubstanciasActivity extends BaseActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = null;
                     if (dataSnapshot.hasChild(key)) {
-                        if (mUser.imagem.equals("default")) {
-                            user = new User(mUser.nome, mUser.email, "default", mSubstanciasSwitch);
+                        if (mUser.imagem.equals(Tabelas.DEFAULT)) {
+                            user = new User(mUser.nome, mUser.email, Tabelas.DEFAULT, mSubstanciasSwitch);
                             Map<String, Object> postValue = user.toMap();
                             Map<String, Object> childUpdates = new HashMap<String, Object>();
                             //Map<String, Object> hashtaghMap = new ObjectMapper().convertValue(childUpdates, Map.class);
@@ -116,7 +117,7 @@ public class SubstanciasActivity extends BaseActivity {
                             mDatabaseUser.updateChildren(childUpdates);
                         }
                     } else {
-                        if (!mUser.imagem.equals("default")) {
+                        if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
                             DatabaseReference current_user_db = mDatabaseUser.child(key);
                             user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                             current_user_db.setValue(user);
@@ -143,10 +144,12 @@ public class SubstanciasActivity extends BaseActivity {
         return new SubstanciasAdapter.OnClickSwitch() {
             @Override
             public void onClick(View view, int position) {
-                if (mSubstanciasSwitch.get(position).status.equals(Tabelas.NAOCONTEM)) {
-                    mSubstanciasSwitch.get(position).status = Tabelas.CONTEM;
+                if (mSubstanciasSwitch.get(position).status.equals(getString(R.string.const_nao_contem))) {
+                    mSubstanciasSwitch.get(position).status = getString(R.string.const_contem);
+                    Log.i("Script", "contem");
                 } else {
-                    mSubstanciasSwitch.get(position).status = Tabelas.NAOCONTEM;
+                    mSubstanciasSwitch.get(position).status = getString(R.string.const_nao_contem);
+                    Log.i("Script", "nao contem");
                 }
             }
         };

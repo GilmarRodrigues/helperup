@@ -26,6 +26,21 @@
     <string name="msg_enviar_email">Email enviado...</string>
     <string name="msg_email_nao_cadastrado">Esse endereço de email, não foi cadastado.</string>
 
+    <!-- Substancias -->
+    <string name="substancia_leite">LEITE</string>
+    <string name="substancia_ovo">OVO</string>
+    <string name="substancia_oleoginosas">OLEÁGINOSAS</string>
+    <string name="substancia_crustaceos">CRUSTÁCEOS OU FRITOS DO MAR</string>
+    <string name="substancia_peixe">PEIXE</string>
+    <string name="substancia_soja">SOJA</string>
+    <string name="substancia_trigo">TRIGO</string>
+    <string name="substancia_gluten">GLÚTEN</string>
+
+    <!-- Constantes -->
+    <string name="const_contem">Contem</string>
+    <string name="const_nao_contem">Não contem</string>
+    <string name="const_contem_tracas">Contem traças</string>
+
     <!-- textos -->
     <string name="text_cadastre_se">NÃO POSSUI UMA CONTA? CADASTRE-SE</string>
     <string name="text_entre">Já possui uma conta? Entre</string>

@@ -181,7 +181,7 @@ public class RegisterUserActivity extends GoogleActivity {
                         DatabaseReference current_user_db = mDatabaseUsuario.child(user_id);
 
 
-                        User user = new User(nome, email, "default");
+                        User user = new User(nome, email, Tabelas.DEFAULT);
                         current_user_db.setValue(user);
 
                         mProgress.dismiss();
@@ -206,7 +206,7 @@ public class RegisterUserActivity extends GoogleActivity {
 
                                 current_user_db.child("nome").setValue(nome);
                                 current_user_db.child("email").setValue(email);
-                                current_user_db.child("fone").setValue("default");
+                                current_user_db.child("fone").setValue(Tabelas.DEFAULT);
                                 current_user_db.child("image").setValue(downloadUri);
 
                                 mProgress.dismiss();

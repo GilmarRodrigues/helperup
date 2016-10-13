@@ -24,14 +24,15 @@ import static com.google.android.gms.common.api.Status.su;
  */
 
 public class SubstanciasAdapter extends BaseAdapter {
-    private List<Substancia> substancias = Tabelas.SUBSTANCIAS;
+    private List<Substancia> substancias;
     private Context mContext;
     private LayoutInflater mInflater;
     private OnClickSwitch onClickSwitch;
 
-    public SubstanciasAdapter(Context context, OnClickSwitch onClickSwitch) {
+    public SubstanciasAdapter(Context context, OnClickSwitch onClickSwitch, List<Substancia> substancias) {
         this.mContext = context;
         this.onClickSwitch = onClickSwitch;
+        this.substancias = substancias;
         this.mInflater = LayoutInflater.from(context);
     }
 
@@ -70,10 +71,12 @@ public class SubstanciasAdapter extends BaseAdapter {
         holder.textSubstancia.setText(substancias.get(position).nome);
 
         //boolean checked = holder.checkSubstancia.isChecked();
-        if (substancias.get(position).status.equals(Tabelas.CONTEM)) {
+        if (substancias.get(position).status.equals(mContext.getString(R.string.const_contem))) {
             holder.switchSubstancia.setChecked(true);
+            //Log.i("Script", "contem");
         } else {
             holder.switchSubstancia.setChecked(false);
+            //Log.i("Script", "nao contem");
         }
 
         if(onClickSwitch != null) {
