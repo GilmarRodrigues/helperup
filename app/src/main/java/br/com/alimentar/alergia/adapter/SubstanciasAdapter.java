@@ -1,23 +1,17 @@
 package br.com.alimentar.alergia.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.model.Substancia;
-import br.com.alimentar.alergia.model.Tabelas;
-
-import static com.google.android.gms.common.api.Status.su;
 
 /**
  * Created by gilmar on 28/09/16.
