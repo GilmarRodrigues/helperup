@@ -27,13 +27,5 @@
         <item name="colorControlHighlight">@color/primary_light</item>
     </style>
 
-    <style name="MenuButtonsStyle">
-        <item name="fab_size">mini</item>
-        <item name="fab_shadowColor">@color/shadow_color</item>
-        <item name="fab_colorNormal">@color/accent</item>
-        <item name="fab_colorPressed">@color/color_pressed</item>
-        <item name="fab_colorRipple">@color/color_ripple</item>
-    </style>
-
 </resources>
 
