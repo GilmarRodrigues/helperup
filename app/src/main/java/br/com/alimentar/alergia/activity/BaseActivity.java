@@ -1,6 +1,9 @@
 package br.com.alimentar.alergia.activity;
 
+import android.app.ProgressDialog;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,8 @@ import br.com.alimentar.alergia.R;
  */
 
 public class BaseActivity extends AppCompatActivity {
+    protected static final String TAG = "Alergia";
+    protected ProgressDialog mProgressDialog;
 
     protected Toolbar setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,6 +61,30 @@ public class BaseActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public void showProgressDialog(int mensagem) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(new ContextThemeWrapper(this, R.style.AppTheme));
+            mProgressDialog.setTitle(getString(R.string.aguarde));
+            mProgressDialog.setMessage(getString(mensagem));
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setCancelable(false);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
     }
 
 }

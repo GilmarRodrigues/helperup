@@ -48,9 +48,7 @@ public class RegisterUserActivity extends GoogleActivity {
         /*mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabase.keepSynced(true);
-        mStorageImage = FirebaseStorage.getInstance().getReference().child("Perfil_imagem");
-
-        mProgress = new ProgressDialog(new ContextThemeWrapper(this, R.style.AppTheme));*/
+        mStorageImage = FirebaseStorage.getInstance().getReference().child("Perfil_imagem");*/
 
         campo_nome = (CustomEditText) findViewById(R.id.edit_nome);
         campo_nome.setOnClickListener(onFocusNome());
@@ -72,7 +70,6 @@ public class RegisterUserActivity extends GoogleActivity {
         findViewById(R.id.text_entrar).setOnClickListener(onClickEntrar());
 
         setGooglePlusButtonText(mGoogleBtn, getString(R.string.btn_cadastrar_com_google));
-        setProgressMsg(R.string.realizando_cadastro);
     }
 
     private View.OnClickListener onClickEntrar() {
@@ -150,10 +147,7 @@ public class RegisterUserActivity extends GoogleActivity {
 
         if (!validator()) {
 
-            mProgress.setTitle(getString(R.string.aguarde));
-            mProgress.setMessage(getString(R.string.realizando_cadastro));
-            mProgress.setCancelable(false);
-            mProgress.show();
+            showProgressDialog(R.string.realizando_cadastro);
 
             mAuth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -166,8 +160,7 @@ public class RegisterUserActivity extends GoogleActivity {
                         User user = new User(nome, email, Tabelas.DEFAULT);
                         current_user_db.setValue(user);
 
-                        mProgress.dismiss();
-
+                        hideProgressDialog();
 
                         Intent mainIntent = new Intent(RegisterUserActivity.this, SubstanciasActivity.class);
                         mainIntent.putExtra(User.KEY, user);
@@ -191,13 +184,13 @@ public class RegisterUserActivity extends GoogleActivity {
                                 current_user_db.child("fone").setValue(Tabelas.DEFAULT);
                                 current_user_db.child("image").setValue(downloadUri);
 
-                                mProgress.dismiss();
 
                             }
                         });*/
                     } else {
                         Toast.makeText(RegisterUserActivity.this, getString(R.string.error_email_ja_cadastrado), Toast.LENGTH_SHORT).show();
-                        mProgress.dismiss();
+                        //mProgress.dismiss();
+                        hideProgressDialog();
                     }
                 }
             });

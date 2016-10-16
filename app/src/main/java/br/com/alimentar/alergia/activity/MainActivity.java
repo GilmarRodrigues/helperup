@@ -38,15 +38,16 @@ import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import static br.com.alimentar.alergia.R.id.nav_cartilha;
+import static br.com.alimentar.alergia.R.id.nav_categoria;
+import static br.com.alimentar.alergia.R.id.nav_configuracoes;
+import static br.com.alimentar.alergia.R.id.nav_favorito;
+import static br.com.alimentar.alergia.R.id.nav_perfil;
+
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
 
     @Override
@@ -96,66 +97,57 @@ public class MainActivity extends BaseActivity
 
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         setUser(headerView);
-        //TextView campo_email = (TextView) headerView.findViewById(R.id.tv_email);
-        //String email = Prefs.getString(this, Login.EMAIL);
-        //if (!email.equals("")) {
-        //campo_email.setText(email);
-        //}
 
         setFirstItemNavigationView(navigationView);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void setUser(View headerView) {
-        final String uid = mAuth.getCurrentUser().getUid();
-        final TextView tv_nome = (TextView) headerView.findViewById(R.id.tv_username);
-        final TextView tv_email = (TextView) headerView.findViewById(R.id.tv_email);
-        final RoundedImageView iv_perfil = (RoundedImageView) headerView.findViewById(R.id.iv_peril);
+        if (mAuth.getCurrentUser() != null) {
+            final String uid = mAuth.getCurrentUser().getUid();
+            final TextView tv_nome = (TextView) headerView.findViewById(R.id.tv_username);
+            final TextView tv_email = (TextView) headerView.findViewById(R.id.tv_email);
+            final RoundedImageView iv_perfil = (RoundedImageView) headerView.findViewById(R.id.iv_peril);
 
-        mDatabase.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final User user = dataSnapshot.getValue(User.class);
-                tv_nome.setText(user.nome);
-                tv_email.setText(user.email);
+            mDatabase.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final User user = dataSnapshot.getValue(User.class);
+                    tv_nome.setText(user.nome);
+                    tv_email.setText(user.email);
 
-                if (!user.imagem.equals(Tabelas.DEFAULT)) {
-                    carregaImagem(iv_perfil, user.imagem);
-                } else {
-                    Log.i("Script", "Foto: " + user.imagem);
+                    if (!user.imagem.equals(Tabelas.DEFAULT)) {
+                        carregaImagem(iv_perfil, user.imagem);
+                    } else {
+                        Log.i(TAG, "Foto: " + user.imagem);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
     protected void onStart() {
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
+        super.onStart();
+
         client.connect();
         mAuth.addAuthStateListener(mAuthListener);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     @Override
     public void onStop() {
-        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
+        super.onStop();
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.disconnect();
     }
 
@@ -201,12 +193,27 @@ public class MainActivity extends BaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                replaceFragment(new HomeFragment());
+                return true;
+            case nav_categoria:
+                return true;
+            case nav_favorito:
+                return true;
+            case nav_cartilha:
+                return true;
+            case nav_perfil:
+                return true;
+            case nav_configuracoes:
+                return true;
+        }
+
+        /*int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             replaceFragment(new HomeFragment());
-        } /*else if (id == R.id.nav_inscricoes) {
+        } else if (id == R.id.nav_inscricoes) {
             replaceFragment(new InscricoesFragment());
         } else if (id == R.id.nav_certificados) {
 

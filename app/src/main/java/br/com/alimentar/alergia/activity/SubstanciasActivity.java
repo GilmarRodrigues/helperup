@@ -27,7 +27,6 @@ import br.com.alimentar.alergia.model.User;
 public class SubstanciasActivity extends BaseActivity {
     private DatabaseReference mDatabaseUser;
     private FirebaseAuth mAuth;
-    private ProgressDialog mProgress;
     private ListView mListView;
     private List<Substancia> mSubstanciasSwitch;
     private User mUser;
@@ -40,8 +39,6 @@ public class SubstanciasActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabaseUser.keepSynced(true);
-
-        mProgress = new ProgressDialog(this);
 
         mSubstanciasSwitch = Tabelas.addSubstancias(this);
 
@@ -85,9 +82,7 @@ public class SubstanciasActivity extends BaseActivity {
         final String key = mAuth.getCurrentUser().getUid();
 
         if (mSubstanciasSwitch.size() > 0) {
-            mProgress.setTitle(getString(R.string.aguarde));
-            mProgress.setMessage(getString(R.string.realizando_cadastro));
-            mProgress.show();
+            showProgressDialog(R.string.realizando_cadastro);
 
             mDatabaseUser.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -121,7 +116,7 @@ public class SubstanciasActivity extends BaseActivity {
                 }
 
             });
-            mProgress.dismiss();
+            hideProgressDialog();
         }
     }
 

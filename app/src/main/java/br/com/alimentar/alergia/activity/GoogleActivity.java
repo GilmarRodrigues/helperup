@@ -44,7 +44,6 @@ import br.com.alimentar.alergia.model.User;
 public class GoogleActivity extends BaseActivity {
     private static final String TAG = "GoogleActivity";
     protected FirebaseAuth mAuth;
-    protected ProgressDialog mProgress;
     protected DatabaseReference mDatabaseUsuario;
     protected SignInButton mGoogleBtn;
     protected static final int RC_SIGN_IN = 1;
@@ -59,10 +58,6 @@ public class GoogleActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabaseUsuario = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabaseUsuario.keepSynced(true);
-
-        mProgress = new ProgressDialog(new ContextThemeWrapper(this, R.style.AppTheme));
-
-        //mGoogleBtn = (SignInButton) findViewById(R.id.google_sign_in_btn);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -79,7 +74,6 @@ public class GoogleActivity extends BaseActivity {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-//        mGoogleBtn.setOnClickListener(onClickSingIn());
     }
 
     protected View.OnClickListener onClickSingIn() {
@@ -104,9 +98,7 @@ public class GoogleActivity extends BaseActivity {
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 
-            mProgress.setTitle(getString(R.string.aguarde));
-            mProgress.setCancelable(false);
-            mProgress.show();
+            showProgressDialog(R.string.realizando_login);
 
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
@@ -114,7 +106,7 @@ public class GoogleActivity extends BaseActivity {
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
-                mProgress.dismiss();
+                hideProgressDialog();
             }
         }
     }
@@ -134,10 +126,9 @@ public class GoogleActivity extends BaseActivity {
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(GoogleActivity.this, "Autenticação falhou.", Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
+                            hideProgressDialog();
                         } else {
-
-                            mProgress.dismiss();
+                            hideProgressDialog();
                             checkUserExist(task);
                         }
                     }
@@ -173,7 +164,7 @@ public class GoogleActivity extends BaseActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(GoogleActivity.this, "Database Error.", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "GoogleActiviy: onCancelled - Database Error.");
                 }
             });
         }
@@ -191,11 +182,6 @@ public class GoogleActivity extends BaseActivity {
                 return;
             }
         }
-    }
-
-    protected void setProgressMsg(int msg) {
-        mProgress.setMessage(getString(msg));
-
     }
 
 }
