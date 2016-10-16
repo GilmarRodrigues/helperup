@@ -1,4 +1,4 @@
-package br.com.alimentar.alergia.custom;
+package br.com.alimentar.alergia.view;
 
 import android.content.Context;
 import android.support.v7.widget.Toolbar;

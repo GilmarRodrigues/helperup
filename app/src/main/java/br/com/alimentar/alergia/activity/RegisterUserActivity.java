@@ -1,16 +1,9 @@
 package br.com.alimentar.alergia.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.ContextThemeWrapper;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -19,26 +12,15 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
-
-import java.util.ArrayList;
 
 import br.com.alimentar.alergia.R;
-import br.com.alimentar.alergia.adapter.SubstanciasAdapter;
-import br.com.alimentar.alergia.custom.CustomEditText;
+import br.com.alimentar.alergia.view.CustomEditText;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.utils.AnimationUtils;
 import br.com.alimentar.alergia.validator.UserValidator;
-
-import static android.R.attr.data;
 
 public class RegisterUserActivity extends GoogleActivity {
     private CustomEditText campo_nome;

@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="@android:color/white">
 
-                    <br.com.alimentar.alergia.custom.CustomEditText
+                    <br.com.alimentar.alergia.view.CustomEditText
                         android:id="@+id/edit_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="@android:color/white">
 
-                    <br.com.alimentar.alergia.custom.CustomEditText
+                    <br.com.alimentar.alergia.view.CustomEditText
                         android:id="@+id/edit_senha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

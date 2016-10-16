@@ -1,15 +1,11 @@
 package br.com.alimentar.alergia.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,7 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.alimentar.alergia.R;
-import br.com.alimentar.alergia.custom.CustomEditText;
+import br.com.alimentar.alergia.view.CustomEditText;
 import br.com.alimentar.alergia.validator.UserValidator;
 
 public class RecuperarSenhaActivity extends BaseActivity {

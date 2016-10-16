@@ -17,6 +17,12 @@
     <string name="action_profile">Perfil</string>
     <string name="action_logout">Sair</string>
     <string name="action_settings">Configurações</string>
+    <string name="menu_drawer_inicio">Início</string>
+    <string name="menu_drawer_categoria">Categorias</string>
+    <string name="menu_drawer_favorito">Favoritos</string>
+    <string name="menu_drawer_cartilha">Cartilha</string>
+    <string name="menu_drawer_perfil">Perfil</string>
+    <string name="menu_drawer_configuracoes">Configurações</string>
 
     <!-- mensagens -->
     <string name="aguarde">Aguarde</string>

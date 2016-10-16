@@ -10,6 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize "4g" // Use gig increments depending on needs
+        jumboMode = true
+        //incremental true
     }
     buildTypes {
         release {

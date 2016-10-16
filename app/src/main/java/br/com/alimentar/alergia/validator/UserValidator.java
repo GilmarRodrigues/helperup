@@ -3,11 +3,9 @@ package br.com.alimentar.alergia.validator;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
-import br.com.alimentar.alergia.custom.CustomEditText;
+import br.com.alimentar.alergia.view.CustomEditText;
 
 /**
  * Created by gilmar on 25/09/16.
