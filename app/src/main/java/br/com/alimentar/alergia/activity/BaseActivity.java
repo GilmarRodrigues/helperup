@@ -1,6 +1,9 @@
 package br.com.alimentar.alergia.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -85,6 +89,22 @@ public class BaseActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         hideProgressDialog();
+    }
+
+    public FirebaseAuth.AuthStateListener usuarioLogado(FirebaseAuth.AuthStateListener authStateListener, final Context context) {
+        return authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    Intent loginIntent = new Intent(context, ViewPageActivity.class);
+                    //loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //loginIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                    finish();
+                }
+            }
+        };
+
     }
 
 }

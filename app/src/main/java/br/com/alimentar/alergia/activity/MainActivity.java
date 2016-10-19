@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +15,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -28,9 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.HomeFragment;
@@ -62,26 +64,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mDatabase = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabase.keepSynced(true);
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    Intent loginIntent = new Intent(MainActivity.this, ViewPageActivity.class);
-                    //loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    //loginIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-                    finish();
-                }
-            }
-        };
+        mAuthListener =  usuarioLogado(mAuthListener, MainActivity.this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                new IntentIntegrator(MainActivity.this).initiateScan();
             }
         });
 
@@ -196,30 +187,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_home:
                 replaceFragment(new HomeFragment());
-                return true;
+                break;
             case nav_categoria:
-                return true;
+                break;
             case nav_favorito:
-                return true;
+                break;
             case nav_cartilha:
-                return true;
+                break;
             case nav_perfil:
-                return true;
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                break;
             case nav_configuracoes:
-                return true;
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                break;
         }
 
-        /*int id = item.getItemId();
+/*        int id = item.getItemId();
 
         if (id == R.id.nav_home) {
             replaceFragment(new HomeFragment());
-        } else if (id == R.id.nav_inscricoes) {
-            replaceFragment(new InscricoesFragment());
-        } else if (id == R.id.nav_certificados) {
+        } else if (id == R.id.nav_categoria) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_favorito) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_cartilha) {
+
+        } else if (id == R.id.nav_perfil) {
+
+        } else if (id == R.id.nav_configuracoes){
 
         }*/
 
@@ -232,19 +227,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_drawer_cotainer, frag, "TAG").commit();
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Main Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Main Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
                 .setObject(object)
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
                 .build();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

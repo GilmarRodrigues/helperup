@@ -2,6 +2,14 @@
     <!-- App -->
     <string name="app_name">Alergia Alimentar</string>
 
+    <!-- Titilos telas -->
+    <string name="activity_login">Fazer login</string>
+    <string name="activity_register">Criar uma conta gratuita</string>
+    <string name="activity_profile">Perfil</string>
+    <string name="activity_substancias">Substâncias</string>
+    <string name="activity_recuperar_senha">Recuperar Senha</string>
+    <string name="activity_settings">Configurações</string>
+
     <!-- Botões -->
     <string name="btn_sign_in">ENTRAR</string>
     <string name="btn_save">SALVAR</string>
@@ -61,13 +69,6 @@
     <string name="text_termo_uso">Termos de uso</string>
     <string name="text_politica_privatizacao">Política de privatização</string>
 
-    <!-- Titilos Telas -->
-    <string name="activity_login">Fazer login</string>
-    <string name="activity_register">Criar uma conta gratuita</string>
-    <string name="activity_profile">Perfil</string>
-    <string name="activity_substancias">Substâncias</string>
-    <string name="activity_recuperar_senha">Recuperar Senha</string>
-
     <!-- validator -->
     <string name="error_field_required">Este campo é obrigatório</string>
     <string name="error_invalid_email">Este endereço de e-mail é inválido</string>
@@ -93,5 +94,19 @@
     <!-- Navigation -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- tela settings -->
+    <string name="setting_suporte">Contato suporte</string>
+    <string name="setting_versao">Versão</string>
+    <string name="setting_numero_versao">Numero da versão</string>
+    <string name="setting_termos_uso">Termos de uso</string>
+    <string name="setting_politica_privacidade">Politica de privacidade</string>
+    <string name="setting_redes_sociais">Redes sociais</string>
+    <string name="setting_facebook">Curta Alegia no Facebook</string>
+    <string name="setting_twitter">Siga @Alergia no Twitter</string>
+    <string name="setting_ajude_comunidade">Ajude a comunidade</string>
+    <string name="setting_convide_amigos">Convide amigos</string>
+    <string name="setting_avaliar">Avaliar o Alergia</string>
+    <string name="settin_sair">Sair</string>
 
 </resources>

@@ -8,7 +8,8 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
-    <color name="divider">#BDBDBD</color>
+    <color name="divider">#efefef</color>
+    <color name="divider_dois">#BDBDBD</color>
     <color name="color_canteen">#fdfdfd</color>
     <color name="color_dark_canteen">#ebeef0</color>
 </resources>
