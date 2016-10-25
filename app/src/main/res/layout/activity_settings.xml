@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/divider"
     android:orientation="vertical"
-    tools:context="br.com.alimentar.alergia.activity.SettingActivity">
+    tools:context="br.com.alimentar.alergia.activity.SettingsActivity">
 
     <ScrollView
         android:id="@+id/setting_scroll"
@@ -27,6 +27,27 @@
                 android:background="@android:color/white">
 
                 <TextView
+                    android:id="@+id/tv_register_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:text="@string/setting_register_produto"
+                    style="@style/primar_text" />
+
+                <View
+                    android:id="@+id/view_register_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_register_produto"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:background="@color/divider" />
+
+                <TextView
                     android:id="@+id/tv_contate_suport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,7 +57,8 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_suporte"
-                    android:textColor="@android:color/black" />
+                    android:layout_below="@id/view_register_produto"
+                    style="@style/primar_text"/>
 
                 <View
                     android:id="@+id/view_contate_suport"
@@ -57,7 +79,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_versao"
-                    android:textColor="@android:color/black" />
+                    style="@style/primar_text" />
 
                 <TextView
                     android:id="@+id/tv_numero_versao"
@@ -92,7 +114,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_termos_uso"
-                    android:textColor="@android:color/black" />
+                    style="@style/primar_text" />
 
                 <View
                     android:id="@+id/view_termos_uso"
@@ -114,7 +136,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_politica_privacidade"
-                    android:textColor="@android:color/black" />
+                    style="@style/primar_text" />
 
             </RelativeLayout>
 
@@ -132,7 +154,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_redes_sociais"
-                    android:textColor="@color/divider_dois"
+                    android:textColor="@color/secondary_text"
                     android:textSize="12sp" />
 
                 <RelativeLayout
@@ -163,7 +185,7 @@
                         android:layout_toRightOf="@+id/iv_facebook"
                         android:paddingBottom="@dimen/activity_vertical_margin"
                         android:text="@string/setting_facebook"
-                        android:textColor="@android:color/black" />
+                        style="@style/primar_text" />
 
                     <View
                         android:id="@+id/view_facebook"
@@ -204,7 +226,7 @@
                         android:layout_toRightOf="@+id/iv_twitter"
                         android:paddingTop="@dimen/activity_vertical_margin"
                         android:text="@string/setting_twitter"
-                        android:textColor="@android:color/black" />
+                        style="@style/primar_text" />
 
                 </RelativeLayout>
             </RelativeLayout>
@@ -224,7 +246,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/setting_ajude_comunidade"
-                    android:textColor="@color/divider_dois"
+                    android:textColor="@color/secondary_text"
                     android:textSize="12dp" />
 
                 <RelativeLayout
@@ -256,7 +278,7 @@
                         android:layout_toRightOf="@+id/iv_convide_amigos"
                         android:paddingBottom="@dimen/activity_vertical_margin"
                         android:text="@string/setting_convide_amigos"
-                        android:textColor="@android:color/black" />
+                        style="@style/primar_text" />
 
                     <View
                         android:id="@+id/view_convide_amigos"
@@ -297,7 +319,7 @@
                         android:layout_toRightOf="@+id/iv_avaliar_app"
                         android:paddingTop="@dimen/activity_vertical_margin"
                         android:text="@string/setting_avaliar"
-                        android:textColor="@android:color/black" />
+                        style="@style/primar_text" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -318,7 +340,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     android:text="@string/settin_sair"
-                    android:textColor="@android:color/black" />
+                    style="@style/primar_text" />
 
             </RelativeLayout>
 

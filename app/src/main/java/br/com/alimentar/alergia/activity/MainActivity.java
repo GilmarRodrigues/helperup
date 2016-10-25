@@ -147,11 +147,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_profile:
-                startActivity(new Intent(this, ProfileActivity.class));
-                return true;
-            case R.id.action_logout:
-                logout();
+            case R.id.action_search:
+                Toast.makeText(MainActivity.this, "Pesquisar", Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -194,25 +191,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 break;
             case nav_configuracoes:
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
         }
-
-/*        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            replaceFragment(new HomeFragment());
-        } else if (id == R.id.nav_categoria) {
-
-        } else if (id == R.id.nav_favorito) {
-
-        } else if (id == R.id.nav_cartilha) {
-
-        } else if (id == R.id.nav_perfil) {
-
-        } else if (id == R.id.nav_configuracoes){
-
-        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

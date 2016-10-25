@@ -3,13 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.alimentar.alergia.activity.MainActivity">
 
-    <item android:id="@+id/action_profile"
-        android:title="@string/action_profile"
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_search"
         android:orderInCategory="100"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_logout"
-        android:title="@string/action_logout"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

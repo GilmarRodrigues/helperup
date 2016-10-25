@@ -24,13 +24,4 @@ public class UserValidator extends Validator {
         return password.length() > 5;
     }
 
-    public static void openTeclado(CustomEditText editText, Context context) {
-        editText.clearFocus();
-        editText.setFocusableInTouchMode(true);
-        editText.setFocusable(true);
-        editText.requestFocus();
-        InputMethodManager mgr = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        mgr.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
-    }
-
 }

@@ -1,29 +1,27 @@
 package br.com.alimentar.alergia.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 
-import static br.com.alimentar.alergia.R.id.tv_versao;
-
-public class SettingActivity extends BaseActivity {
+public class SettingsActivity extends BaseActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_settings);
 
         mAuth = FirebaseAuth.getInstance();
 
+        findViewById(R.id.tv_register_produto).setOnClickListener(onClickRegisterProduto());
         findViewById(R.id.tv_contate_suport).setOnClickListener(onClickSuport());
         findViewById(R.id.tv_termos_uso).setOnClickListener(onClickTermosDeUso());
         findViewById(R.id.tv_politica_privacidade).setOnClickListener(onClickPoliticaPrivacidade());
@@ -36,7 +34,16 @@ public class SettingActivity extends BaseActivity {
         TextView tv_numro_versao = (TextView) findViewById(R.id.tv_numero_versao);
         tv_numro_versao.setText(AndroidUtils.getVersionName(this));
 
-        mAuthListener = usuarioLogado(mAuthListener, SettingActivity.this);
+        mAuthListener = usuarioLogado(mAuthListener, SettingsActivity.this);
+    }
+
+    private View.OnClickListener onClickRegisterProduto() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, RegisterProdutoActivity.class));
+            }
+        };
     }
 
     private View.OnClickListener onClickSuport() {

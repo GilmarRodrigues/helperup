@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import br.com.alimentar.alergia.view.CustomEditText;
+
 /**
  * Created by gilmar on 25/09/16.
  */
@@ -32,6 +34,15 @@ public abstract class Validator {
             edText.requestFocus();
         }
         return false;
+    }
+
+    public static void openTeclado(CustomEditText editText, Context context) {
+        editText.clearFocus();
+        editText.setFocusableInTouchMode(true);
+        editText.setFocusable(true);
+        editText.requestFocus();
+        InputMethodManager mgr = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
     }
 
 }

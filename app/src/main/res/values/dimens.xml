@@ -10,4 +10,6 @@
 
     <dimen name="userPhoto_layout_width">64dp</dimen>
     <dimen name="userPhoto_layout_height">64dp</dimen>
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

@@ -63,7 +63,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.LoginActivity" />
         </activity>
-        <activity android:name=".activity.SettingActivity"
+        <activity
+            android:name=".activity.SettingsActivity"
             android:label="@string/activity_settings"
             android:parentActivityName=".activity.MainActivity">
             <meta-data
@@ -84,6 +85,16 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activity.RegisterProdutoActivity"
+            android:label="@string/title_activity_register_produto"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.alimentar.alergia.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
