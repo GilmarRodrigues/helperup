@@ -12,12 +12,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-    /*dexOptions {
-        preDexLibraries true
-        javaMaxHeapSize "3g" // Use gig increments depending on needs
-        jumboMode = true
-        //incremental true
-    }*/
     buildTypes {
         release {
             minifyEnabled false
@@ -56,5 +50,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.3'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+    compile 'id.zelory:compressor:1.0.3'
+    compile 'com.android.support:multidex:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

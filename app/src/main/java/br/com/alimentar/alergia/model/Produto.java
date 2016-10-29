@@ -15,6 +15,7 @@ public class Produto implements Parcelable{
     public static final String KEY = "produto";
     public String nome;
     public String fabricatente;
+    private String codigo_barra;
     public String categoria;
     public String imagem;
     public String data;
@@ -25,9 +26,10 @@ public class Produto implements Parcelable{
     public Produto() {
     }
 
-    public Produto(String nome, String fabricatente, String categoria, String imagem, String data, String status, String uid_user, List<Substancia> substancias) {
+    public Produto(String nome, String fabricatente, String codigo_barra, String categoria, String imagem, String data, String status, String uid_user, List<Substancia> substancias) {
         this.nome = nome;
         this.fabricatente = fabricatente;
+        this.codigo_barra = codigo_barra;
         this.categoria = categoria;
         this.imagem = imagem;
         this.data = data;
@@ -39,6 +41,7 @@ public class Produto implements Parcelable{
     protected Produto(Parcel in) {
         nome = in.readString();
         fabricatente = in.readString();
+        codigo_barra = in.readString();
         categoria = in.readString();
         imagem = in.readString();
         data = in.readString();
@@ -65,14 +68,15 @@ public class Produto implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nome);
-        dest.writeString(fabricatente);
-        dest.writeString(categoria);
-        dest.writeString(imagem);
-        dest.writeString(data);
-        dest.writeString(status);
-        dest.writeString(uid_user);
-        dest.writeTypedList(substancias);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nome);
+        parcel.writeString(fabricatente);
+        parcel.writeString(codigo_barra);
+        parcel.writeString(categoria);
+        parcel.writeString(imagem);
+        parcel.writeString(data);
+        parcel.writeString(status);
+        parcel.writeString(uid_user);
+        parcel.writeTypedList(substancias);
     }
 }

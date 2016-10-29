@@ -9,7 +9,7 @@
     <string name="activity_substancias">Alérgenos</string>
     <string name="activity_recuperar_senha">Recuperar Senha</string>
     <string name="activity_settings">Configurações</string>
-    <string name="title_activity_register_produto">RegisterProdutoActivity</string>
+    <string name="title_activity_register_produto"></string>
 
     <!-- Botões -->
     <string name="btn_sign_in">ENTRAR</string>
@@ -44,6 +44,8 @@
     <string name="msg_checando_email">Checando email</string>
     <string name="msg_enviar_email">Email enviado...</string>
     <string name="msg_email_nao_cadastrado">Esse endereço de email, não foi cadastado.</string>
+    <string name="msg_salvando_produto">Salvando Produto</string>
+    <string name="msg_produto_salvo">Produto salvo com sucesso</string>
 
     <!-- Substancias -->
     <string name="substancia_leite">LEITE</string>
@@ -209,5 +211,4 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-
 </resources>
