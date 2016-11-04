@@ -12,129 +12,126 @@
     tools:context="br.com.alimentar.alergia.activity.RegisterProdutoActivity"
     tools:showIn="@layout/activity_register_produto">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_email"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <br.com.alimentar.alergia.view.CustomEditText
-                android:id="@+id/edit_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="false"
-                android:hint="@string/text_nome"
-                android:inputType="text" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_fabricante"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <br.com.alimentar.alergia.view.CustomAutoCompleteTextView
-                android:id="@+id/edit_fabricante"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:completionHint="@string/text_digite_nome_fabricante"
-                android:completionThreshold="1"
-                android:focusableInTouchMode="false"
-                android:hint="@string/text_fabricante"
-                android:inputType="text" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_codigo_barra"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_input_nome"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <br.com.alimentar.alergia.view.CustomEditText
-                    android:id="@+id/edit_codigo_barra"
-                    android:layout_width="269dp"
+                    android:id="@+id/edit_nome"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/text_codigo_barra"
-                    android:inputType="numberDecimal" />
+                    android:hint="@string/text_nome"
+                    android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <ImageButton
-                android:id="@+id/scanner_btn"
-                style="?android:textAppearanceSmall"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/text_input_fabricante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <br.com.alimentar.alergia.view.CustomAutoCompleteTextView
+                    android:id="@+id/edit_fabricante"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionHint="@string/text_digite_nome_fabricante"
+                    android:completionThreshold="1"
+                    android:hint="@string/text_fabricante"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/screen_border_btn"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/btn_proximo"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:textStyle="bold"
-                android:src="@drawable/ic_barcode_scan"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_codigo_barra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:text="@string/text_categoria"
-            android:layout_marginTop="10dp"/>
+                    <br.com.alimentar.alergia.view.CustomEditText
+                        android:id="@+id/edit_codigo_barra"
+                        android:layout_width="269dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/text_codigo_barra"
+                        android:inputType="numberDecimal" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+                </android.support.design.widget.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/spinner_categoria"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="0dp"
-                android:background="@drawable/spinner_item_drawable"
-                android:paddingBottom="10dp"
-                android:prompt="@string/text_selecione_item"/>
+                <ImageButton
+                    android:id="@+id/scanner_btn"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/screen_border_btn"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_barcode_scan"
+                    android:text="@string/btn_proximo"
+                    android:textColor="@color/abc_primary_text_material_dark"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/tvInvisibleError"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignBottom="@+id/spinner_categoria"
-                android:layout_alignRight="@+id/spinner_categoria"
-                android:layout_marginTop="0dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:paddingRight="50dp"
-                android:paddingTop="0dp" />
+                android:id="@+id/tv_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/text_categoria"
+                android:textSize="13sp" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
-        <Button
-            android:id="@+id/proximo_btn"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/screen_border_btn"
-            android:text="@string/btn_proximo"
-            android:textColor="@color/abc_primary_text_material_dark"
-            android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/spinner_categoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="0dp"
+                    android:background="@drawable/spinner_item_drawable"
+                    android:paddingBottom="10dp"
+                    android:prompt="@string/text_selecione_item" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tvInvisibleError"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignBottom="@+id/spinner_categoria"
+                    android:layout_alignRight="@+id/spinner_categoria"
+                    android:layout_marginTop="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingRight="50dp"
+                    android:paddingTop="0dp" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/proximo_btn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/screen_border_btn"
+                android:text="@string/btn_proximo"
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

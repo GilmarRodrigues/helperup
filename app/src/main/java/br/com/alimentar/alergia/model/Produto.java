@@ -23,7 +23,15 @@ public class Produto implements Parcelable{
     public String uid_user;
     public List<Substancia> substancias;
 
-    public Produto() {
+    public Produto(String nome, String fabricatente, String codigo_barra, String categoria, String imagem, String data, String status, String uid_user) {
+        this.nome = nome;
+        this.fabricatente = fabricatente;
+        this.codigo_barra = codigo_barra;
+        this.categoria = categoria;
+        this.imagem = imagem;
+        this.data = data;
+        this.status = status;
+        this.uid_user = uid_user;
     }
 
     public Produto(String nome, String fabricatente, String codigo_barra, String categoria, String imagem, String data, String status, String uid_user, List<Substancia> substancias) {

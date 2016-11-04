@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import br.com.alimentar.alergia.view.CustomEditText;
 
@@ -36,6 +37,7 @@ public abstract class Validator {
         return false;
     }
 
+    // fecha teclado
     public static void openTeclado(CustomEditText editText, Context context) {
         editText.clearFocus();
         editText.setFocusableInTouchMode(true);

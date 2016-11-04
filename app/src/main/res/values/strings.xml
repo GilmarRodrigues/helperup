@@ -46,6 +46,7 @@
     <string name="msg_email_nao_cadastrado">Esse endereço de email, não foi cadastado.</string>
     <string name="msg_salvando_produto">Salvando Produto</string>
     <string name="msg_produto_salvo">Produto salvo com sucesso</string>
+    <string name="msg_imagem_null">Ops.. Erro ao recuperar imagem, tente novamente.</string>
 
     <!-- Substancias -->
     <string name="substancia_leite">LEITE</string>
@@ -87,6 +88,7 @@
     <string name="error_invalid_password">Esta senha é muito curta</string>
     <string name="error_login_invalid">Email e senha inválido</string>
     <string name="error_email_ja_cadastrado">Seu e-mail já está cadastrado. Use o botão "JÁ POSSUI UMA CONTA? ENTRE" abaixo.</string>
+    <string name="error_image_not_null">O produto precisa conter uma imagem</string>
 
 
     <!-- Intro -->
@@ -121,6 +123,21 @@
     <string name="setting_convide_amigos">Convide amigos</string>
     <string name="setting_avaliar">Avaliar o Alergia</string>
     <string name="settin_sair">Sair</string>
+
+    <!-- Categorias do produto -->
+    <string name="categoria_selecione_item">Selecione um item</string>
+    <string name="categoria_bebidas">Bebidas</string>
+    <string name="categoria_biscoitos">Biscoitos</string>
+    <string name="categoria_congelados">Congelados</string>
+    <string name="categoria_doces_sobremesas">Doces e sobremesas</string>
+    <string name="categoria_enlatados">Enlatados</string>
+    <string name="categoria_graos_cereais">Grãos e cereais</string>
+    <string name="categoria_leite">Leite</string>
+    <string name="categoria_iorgute">Iorgute</string>
+    <string name="categoria_massa">Massa</string>
+    <string name="categoria_paes">Pães</string>
+    <string name="categoria_bolos">Bolos</string>
+    <string name="categoria_queijo_frios">Queijo e frios</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"

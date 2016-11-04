@@ -113,7 +113,9 @@ public class CustomBottomSheetDialogFragment extends BottomSheetDialogFragment {
         super.onActivityResult(requestCode, resultCode, data);
         Uri imagem = null;
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            imagem = Uri.fromFile(file);
+            if (file != null) {
+                imagem = Uri.fromFile(file);
+            }
         } else if (requestCode == GALERRY_REQUEST && resultCode == Activity.RESULT_OK) {
             imagem = data.getData();
         }
