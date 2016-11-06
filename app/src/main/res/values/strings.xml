@@ -139,6 +139,15 @@
     <string name="categoria_bolos">Bolos</string>
     <string name="categoria_queijo_frios">Queijo e frios</string>
 
+    <!-- Fabricas-->
+    <string name="fabrica_coca_cola">Coca-Cola</string>
+    <string name="fabrica_fanta">Fanta</string>
+    <string name="fabrica_pepsi">Pepsi</string>
+    <string name="fabrica_kuat">Kuat</string>
+    <string name="fabrica_guarana_antartica">Garaná Antártica</string>
+    <string name="fabrica_sukita">Sukita</string>
+    <string name="fabrica_sprite">Sprite</string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

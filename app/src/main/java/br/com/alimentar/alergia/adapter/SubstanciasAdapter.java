@@ -67,10 +67,8 @@ public class SubstanciasAdapter extends BaseAdapter {
         //boolean checked = holder.checkSubstancia.isChecked();
         if (substancias.get(position).status.equals(mContext.getString(R.string.const_contem))) {
             holder.switchSubstancia.setChecked(true);
-            //Log.i("Script", "contem");
         } else {
             holder.switchSubstancia.setChecked(false);
-            //Log.i("Script", "nao contem");
         }
 
         if(onClickSwitch != null) {

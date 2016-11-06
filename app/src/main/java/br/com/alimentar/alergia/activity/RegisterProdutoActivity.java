@@ -65,6 +65,7 @@ public class RegisterProdutoActivity extends BaseActivity {
     private DatabaseReference mDatabaseUser;
     private int mPositionSelectorCategoria = 0;
     private String mCategorias[] = null;
+    private String mFabricas[] = null;
 
 
     @Override
@@ -92,6 +93,7 @@ public class RegisterProdutoActivity extends BaseActivity {
         seletor_categoria = (Spinner) findViewById(R.id.spinner_categoria);
         iv_produto = (ImageView) findViewById(R.id.iv_produto);
         setCategorias();
+        setAutoCompleteFabrica();
 
         findViewById(fab).setOnClickListener(onClickFab());
         findViewById(R.id.proximo_btn).setOnClickListener(onClickProximo());
@@ -240,6 +242,13 @@ public class RegisterProdutoActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void setAutoCompleteFabrica() {
+        mFabricas = new String[]{getString(R.string.fabrica_kuat), getString(R.string.fabrica_coca_cola), getString(R.string.fabrica_fanta), getString(R.string.fabrica_pepsi),
+                getString(R.string.fabrica_guarana_antartica), getString(R.string.fabrica_sukita), getString(R.string.fabrica_sprite)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mFabricas);
+        campo_fabricante.setAdapter(adapter);
     }
 
 }
