@@ -15,13 +15,16 @@ public class Produto implements Parcelable{
     public static final String KEY = "produto";
     public String nome;
     public String fabricatente;
-    private String codigo_barra;
+    public String codigo_barra;
     public String categoria;
     public String imagem;
     public String data;
     public String status;
     public String uid_user;
     public List<Substancia> substancias;
+
+    public Produto() {
+    }
 
     public Produto(String nome, String fabricatente, String codigo_barra, String categoria, String imagem, String data, String status, String uid_user) {
         this.nome = nome;

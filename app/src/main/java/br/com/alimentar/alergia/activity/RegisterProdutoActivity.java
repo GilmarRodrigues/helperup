@@ -1,10 +1,10 @@
 package br.com.alimentar.alergia.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,17 +29,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CustomBottomSheetDialogFragment;
 import br.com.alimentar.alergia.model.Produto;
-import br.com.alimentar.alergia.model.Substancia;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.validator.ProdutoValidator;
 import br.com.alimentar.alergia.view.CustomAutoCompleteTextView;
@@ -97,7 +96,17 @@ public class RegisterProdutoActivity extends BaseActivity {
 
         findViewById(fab).setOnClickListener(onClickFab());
         findViewById(R.id.proximo_btn).setOnClickListener(onClickProximo());
+        findViewById(R.id.btn_scanner).setOnClickListener(onClickScanner());
 
+    }
+
+    private View.OnClickListener onClickScanner() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new IntentIntegrator(RegisterProdutoActivity.this).initiateScan();
+            }
+        };
     }
 
     private View.OnClickListener onClickProximo() {
@@ -180,6 +189,22 @@ public class RegisterProdutoActivity extends BaseActivity {
                     });
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                campo_codigo_barra.setText(result.getContents());
+                if (verificaCodigoBarra(result.getContents())) {
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
