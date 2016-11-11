@@ -34,6 +34,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import br.com.alimentar.alergia.R;
@@ -45,6 +47,11 @@ import br.com.alimentar.alergia.view.CustomAutoCompleteTextView;
 import br.com.alimentar.alergia.view.CustomEditText;
 import id.zelory.compressor.Compressor;
 import id.zelory.compressor.FileUtil;
+
+import java.util.Calendar;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static br.com.alimentar.alergia.R.id.edit_codigo_barra;
 import static br.com.alimentar.alergia.R.id.fab;
@@ -167,7 +174,7 @@ public class RegisterProdutoActivity extends BaseActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), String.valueOf(new Date()), "true", mCurrentUser.getUid());
+                            Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid());
                             newProduto.setValue(produto).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -195,8 +202,8 @@ public class RegisterProdutoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 campo_codigo_barra.setText(result.getContents());
@@ -274,6 +281,18 @@ public class RegisterProdutoActivity extends BaseActivity {
                 getString(R.string.fabrica_guarana_antartica), getString(R.string.fabrica_sukita), getString(R.string.fabrica_sprite)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mFabricas);
         campo_fabricante.setAdapter(adapter);
+    }
+
+    private String dataAtual() {
+        Calendar c = Calendar.getInstance();
+        Date date = c.getTime();
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String data = fmt.format(date);
+
+        //Locale brasil = new Locale("pt", "BR");
+        //DateFormat f2 = DateFormat.getDateInstance(DateFormat.FULL, brasil);
+        //String data = f2.format(date);
+        return data;
     }
 
 }
