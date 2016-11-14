@@ -41,7 +41,9 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, RegisterProdutoActivity.class));
+                Intent intent = new Intent(SettingsActivity.this, RegisterProdutoActivity.class);
+                intent.putExtra("codigo_barra", "");
+                startActivity(intent);
             }
         };
     }

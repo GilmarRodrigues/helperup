@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,17 +31,21 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
+
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.HomeFragment;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
+import static android.R.attr.key;
 import static br.com.alimentar.alergia.R.id.nav_cartilha;
 import static br.com.alimentar.alergia.R.id.nav_categoria;
 import static br.com.alimentar.alergia.R.id.nav_configuracoes;
 import static br.com.alimentar.alergia.R.id.nav_favorito;
 import static br.com.alimentar.alergia.R.id.nav_perfil;
+import static com.google.android.gms.internal.zzapz.boo;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
@@ -60,7 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mDatabase = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabase.keepSynced(true);
 
-        mAuthListener =  usuarioLogado(mAuthListener, MainActivity.this);
+        mAuthListener = usuarioLogado(mAuthListener, MainActivity.this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -83,6 +88,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+
         setUser(headerView);
 
         setFirstItemNavigationView(navigationView);
@@ -95,6 +101,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             final String uid = mAuth.getCurrentUser().getUid();
             final TextView tv_nome = (TextView) headerView.findViewById(R.id.tv_username);
             final TextView tv_email = (TextView) headerView.findViewById(R.id.tv_email);
+            final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.progressBar);
             final RoundedImageView iv_perfil = (RoundedImageView) headerView.findViewById(R.id.iv_peril);
 
             mDatabase.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -105,7 +112,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     tv_email.setText(user.email);
 
                     if (!user.imagem.equals(Tabelas.DEFAULT)) {
-                        carregaImagem(iv_perfil, user.imagem);
+                        carregaImagem(iv_perfil, user.imagem, progressBar);
                     } else {
                         Log.i(TAG, "Foto: " + user.imagem);
                     }
@@ -217,12 +224,37 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+        final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Log.i("MainActivy", "onActivityResult:Cancelled");
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference().child(Tabelas.PRODUTO);
+                database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        boolean flag = true;
+                        for (DataSnapshot produto : dataSnapshot.getChildren()) {
+                            if (result.getContents().equals(produto.child("codigo_barra").getValue(String.class))) {
+                                flag = false;
+                                Intent intent = new Intent(MainActivity.this, ViewProdutoActivity.class);
+                                intent.putExtra("key", produto.getKey());
+                                startActivity(intent);
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            Intent intent = new Intent(MainActivity.this, RegisterProdutoActivity.class);
+                            intent.putExtra("codigo_barra", result.getContents());
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                    }
+                });
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

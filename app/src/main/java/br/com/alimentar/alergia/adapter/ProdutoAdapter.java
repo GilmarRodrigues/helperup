@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -49,12 +50,13 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
     }
 
     @Override
-    protected void populateViewHolder(final ViewHolder viewHolder, Produto model, final int position) {
+    protected void populateViewHolder(final ViewHolder viewHolder, final Produto model, final int position) {
         final String key = getRef(position).getKey();
         viewHolder.tv_nome.setText(model.nome);
         viewHolder.tv_data.setText(formatDate(model.data));
 
-        carregaImagem(viewHolder.iv_produto, model.imagem);
+
+        carregaImagem(viewHolder.iv_produto, model.imagem, viewHolder.progressBar);
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         database.child(model.uid_user).addValueEventListener(new ValueEventListener() {
@@ -63,7 +65,12 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
                 String nome_user = (String) dataSnapshot.child("nome").getValue();
                 String imagem_user = (String) dataSnapshot.child("imagem").getValue();
                 viewHolder.tv_nome_user.setText(nome_user);
-                carregaImagem(viewHolder.iv_perfil, imagem_user);
+                if (!imagem_user.equals(Tabelas.DEFAULT)) {
+                    carregaImagem(viewHolder.iv_perfil, imagem_user, viewHolder.progressBarPerfil);
+                } else {
+                    viewHolder.progressBarPerfil.setVisibility(View.GONE);
+                    viewHolder.iv_perfil.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_img_perfil));
+                }
             }
 
             @Override
@@ -86,6 +93,8 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
         TextView tv_nome;
         TextView tv_data;
         TextView tv_nome_user;
+        ProgressBar progressBar;
+        ProgressBar progressBarPerfil;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -94,7 +103,8 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
             tv_nome = (TextView) itemView.findViewById(R.id.tv_nome);
             tv_data = (TextView) itemView.findViewById(R.id.tv_data);
             tv_nome_user = (TextView) itemView.findViewById(R.id.tv_nome_user);
-
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
+            progressBarPerfil = (ProgressBar) itemView.findViewById(R.id.progressBarPerfil);
         }
     }
 
@@ -111,14 +121,14 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
     }
 
 
-    private void carregaImagem(final View imagem, final String url) {
+    private void carregaImagem(final View imagem, final String url, final ProgressBar progressBar) {
         Picasso.with(mContext)
                 .load(url)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into((ImageView) imagem, new Callback() {
                     @Override
                     public void onSuccess() {
-
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -130,12 +140,11 @@ public class ProdutoAdapter extends FirebaseRecyclerAdapter<Produto, ProdutoAdap
                                 .into((ImageView) imagem, new Callback() {
                                     @Override
                                     public void onSuccess() {
-
+                                        progressBar.setVisibility(View.GONE);
                                     }
 
                                     @Override
                                     public void onError() {
-                                        Log.v("Picasso", "Could not fetch image");
                                     }
                                 });
 

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +43,7 @@ import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 
 import static android.R.attr.data;
+import static android.R.attr.key;
 import static android.R.attr.value;
 
 /**
@@ -51,6 +53,8 @@ import static android.R.attr.value;
 public class BaseActivity extends AppCompatActivity {
     protected static final String TAG = "Alergia";
     protected ProgressDialog mProgressDialog;
+    //protected ProgressBar mProgressBar;
+
 
     protected Toolbar setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,6 +62,38 @@ public class BaseActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
         return toolbar;
+    }
+
+    protected void carregaImagem(final View imagem, final String url, final ProgressBar mProgressBar) {
+        Picasso.with(this)
+                .load(url)
+                .networkPolicy(NetworkPolicy.OFFLINE)
+                .into((ImageView) imagem, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        //Try again online if cache failed
+                        Picasso.with(BaseActivity.this)
+                                .load(url)
+                                //.error(R.drawable.header)
+                                .into((ImageView) imagem, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                       // mProgressBar.setVisibility(View.GONE);
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        Log.v("Picasso", "Could not fetch image");
+                                    }
+                                });
+
+                    }
+                });
     }
 
     protected void carregaImagem(final View imagem, final String url) {
@@ -79,7 +115,7 @@ public class BaseActivity extends AppCompatActivity {
                                 .into((ImageView) imagem, new Callback() {
                                     @Override
                                     public void onSuccess() {
-
+                                        // mProgressBar.setVisibility(View.GONE);
                                     }
 
                                     @Override
@@ -165,8 +201,8 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    protected boolean verificaCodigoBarra(final String codigoBarra) {
-        final boolean[] flag = {false};
+    protected String verificaCodigoBarra(final String codigoBarra) {
+        final String[] key = {null};
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child(Tabelas.PRODUTO);
 
@@ -174,17 +210,21 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> list = new ArrayList<String>();
-                String key = null;
                 for (DataSnapshot produto: dataSnapshot.getChildren()) {
-                    //key = produto.getKey();
-                    String codigoBarra = produto.child("codigo_barra").getValue(String.class);
-                    list.add(codigoBarra);
+                    if (codigoBarra.equals(produto.child("codigo_barra").getValue(String.class))) {
+                        key[0] = produto.getKey();
+                        Log.i("Script", "KEY 1 " + key[0]);
+                        break;
+                    }
+                    //String codigoBarra = produto.child("codigo_barra").getValue(String.class);
+                    //list.add(codigoBarra);
                 }
-                if (list.contains(codigoBarra)) {
-                    AndroidUtils.alertDialog(BaseActivity.this, "Atenção!!", "Esse produto já foi cadastrado");
-                } else {
-                    Log.i("Script", "Não existe");
-                }
+                //if (list.contains(codigoBarra)) {
+                    //AndroidUtils.alertDialog(BaseActivity.this, "Atenção!!", "Esse produto já foi cadastrado");
+                //} else {
+
+                  //  Log.i("Script", "Não existe");
+                //}
             }
 
             @Override
@@ -192,7 +232,8 @@ public class BaseActivity extends AppCompatActivity {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
+        Log.i("Script", "KEY 2 " + key[0]);
 
-        return flag[0];
+        return key[0];
     }
 }

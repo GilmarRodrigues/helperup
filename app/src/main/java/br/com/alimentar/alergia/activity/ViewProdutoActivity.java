@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Text;
@@ -45,6 +46,7 @@ public class ViewProdutoActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         mDatabaseProduto = FirebaseDatabase.getInstance().getReference().child(Tabelas.PRODUTO);
         mDatabaseUsuario = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
         mDatabaseProduto.keepSynced(true);
@@ -68,9 +70,10 @@ public class ViewProdutoActivity extends BaseActivity {
                 String uid_user = (String) dataSnapshot.child("uid_user").getValue();
 
                 campo_fabricante.setText((String) dataSnapshot.child("fabricatente").getValue());
+
                 carregaImagem(iv_produto, (String) dataSnapshot.child("imagem").getValue());
+
                 toolbar.setTitle((String) dataSnapshot.child("nome").getValue());
-                Log.i("Srcipt", "Toolbar" + dataSnapshot.child("nome").getValue());
 
                 CollapsingToolbarLayout collapsing = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
                 collapsing.setTitle((String) dataSnapshot.child("nome").getValue());
@@ -102,8 +105,10 @@ public class ViewProdutoActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String imagem = (String) dataSnapshot.child("imagem").getValue();
                 campo_nome_user.setText((String) dataSnapshot.child("nome").getValue());
-                if (imagem != Tabelas.DEFAULT) {
+                if (!imagem.equals(Tabelas.DEFAULT)) {
                     carregaImagem(imagem_perfil, imagem);
+                } else {
+                    imagem_perfil.setImageDrawable(getResources().getDrawable(R.drawable.ic_img_perfil));
                 }
             }
 

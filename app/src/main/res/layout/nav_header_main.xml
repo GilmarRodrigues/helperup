@@ -11,12 +11,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <br.com.alimentar.alergia.view.RoundedImageView
-        android:id="@+id/iv_peril"
-        android:layout_width="@dimen/userPhoto_layout_width"
-        android:layout_height="@dimen/userPhoto_layout_height"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_img_perfil" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <br.com.alimentar.alergia.view.RoundedImageView
+            android:id="@+id/iv_peril"
+            android:layout_width="@dimen/userPhoto_layout_width"
+            android:layout_height="@dimen/userPhoto_layout_height"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:src="@drawable/ic_img_perfil" />
+
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/tv_username"

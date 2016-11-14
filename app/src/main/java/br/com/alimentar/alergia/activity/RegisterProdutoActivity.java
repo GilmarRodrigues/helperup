@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,12 +99,18 @@ public class RegisterProdutoActivity extends BaseActivity {
         campo_codigo_barra = (CustomEditText) findViewById(edit_codigo_barra);
         seletor_categoria = (Spinner) findViewById(R.id.spinner_categoria);
         iv_produto = (ImageView) findViewById(R.id.iv_produto);
+
         setCategorias();
         setAutoCompleteFabrica();
 
         findViewById(fab).setOnClickListener(onClickFab());
         findViewById(R.id.proximo_btn).setOnClickListener(onClickProximo());
         findViewById(R.id.btn_scanner).setOnClickListener(onClickScanner());
+
+        String codigo_barra = getIntent().getExtras().getString("codigo_barra");
+        if (codigo_barra != "") {
+            campo_codigo_barra.setText(codigo_barra);
+        }
 
     }
 
@@ -204,11 +211,11 @@ public class RegisterProdutoActivity extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Log.i("MainActivy","onActivityResult:Cancelled");
             } else {
                 campo_codigo_barra.setText(result.getContents());
-                if (verificaCodigoBarra(result.getContents())) {
-                }
+                //if (verificaCodigoBarra(result.getContents())) {
+                //}
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
