@@ -41,9 +41,14 @@ public class HomeFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        // ordenação decrecente
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(layoutManager);
 
         Query query = mDatabase;
+
 
         mRecyclerView.setAdapter(new ProdutoAdapter(Produto.class, R.layout.row_produto, ProdutoAdapter.ViewHolder.class, query, getContext(), onClick()));
 

@@ -55,7 +55,6 @@ public class BaseActivity extends AppCompatActivity {
     protected ProgressDialog mProgressDialog;
     //protected ProgressBar mProgressBar;
 
-
     protected Toolbar setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
