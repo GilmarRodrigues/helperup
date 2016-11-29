@@ -1,5 +1,7 @@
 package br.com.alimentar.alergia.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -35,8 +38,10 @@ import java.util.ArrayList;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.HomeFragment;
+import br.com.alimentar.alergia.model.Produto;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
+import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
 import static android.R.attr.key;
@@ -45,6 +50,7 @@ import static br.com.alimentar.alergia.R.id.nav_categoria;
 import static br.com.alimentar.alergia.R.id.nav_configuracoes;
 import static br.com.alimentar.alergia.R.id.nav_favorito;
 import static br.com.alimentar.alergia.R.id.nav_perfil;
+import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
 import static com.google.android.gms.internal.zzapz.boo;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -94,6 +100,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setFirstItemNavigationView(navigationView);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        // AQUI
+        //alertDialog(this, R.string.aguarde, R.string.menu_boottom_sheet_camera, onClickPositive());
     }
 
     private void setUser(View headerView) {
@@ -244,9 +253,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             }
                         }
                         if (flag) {
-                            Intent intent = new Intent(MainActivity.this, RegisterProdutoActivity.class);
-                            intent.putExtra("codigo_barra", result.getContents());
-                            startActivity(intent);
+                            alertDialog(MainActivity.this, R.string.msg_produto_não_encontrado, R.string.msg_produto_não_cadastrado, onClickVaiParaRegisterProdutoActivity(result.getContents()));
                         }
                     }
 
@@ -260,4 +267,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+    private AndroidUtils.onClickPositivo onClickVaiParaRegisterProdutoActivity(final String contents) {
+        return new AndroidUtils.onClickPositivo() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(MainActivity.this, RegisterProdutoActivity.class);
+                intent.putExtra("codigo_barra", contents);
+                startActivity(intent);
+            }
+        };
+    }
+
 }

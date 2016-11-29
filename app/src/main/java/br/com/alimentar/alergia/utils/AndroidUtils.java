@@ -81,6 +81,25 @@ public class AndroidUtils {
         }
     }
 
+    public static void alertDialog(final Context context, final int title, final int mensagem, final onClickPositivo onClickPositivo) {
+        try {
+            AlertDialog dialog = new AlertDialog.Builder(context).setTitle(title).setMessage(mensagem).create();
+            dialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.msg_sim), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    onClickPositivo.onClick(dialog, which);
+                }
+            });
+            dialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(R.string.msg_nao), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            dialog.show();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
     // Fecha o teclado virtual se aberto (view com foque)
     public static boolean closeVirtualKeyboard(Context context, View view) {
         // Fecha o teclado virtual
@@ -215,5 +234,13 @@ public class AndroidUtils {
             versionName = "N/A";
         }
         return versionName;
+    }
+
+    public interface onClickPositivo {
+        public void onClick(DialogInterface dialog, int which);
+    }
+
+    public interface onClickNegativo {
+        public void onClick(View view);
     }
 }
