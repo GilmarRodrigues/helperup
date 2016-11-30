@@ -126,10 +126,8 @@ public class RegisterSubstanciasUserActivity extends BaseActivity {
             public void onClick(View view, int position) {
                 if (mSubstanciasSwitch.get(position).status.equals(getString(R.string.const_nao_contem))) {
                     mSubstanciasSwitch.get(position).status = getString(R.string.const_contem);
-                    Log.i("Script", "contem");
                 } else {
                     mSubstanciasSwitch.get(position).status = getString(R.string.const_nao_contem);
-                    Log.i("Script", "nao contem");
                 }
             }
         };

@@ -13,7 +13,8 @@
         android:layout_margin="16dp"
         android:textAlignment="center"
         android:text="@string/text_subastancia_check_in"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"

@@ -46,6 +46,7 @@
     <string name="msg_enviar_email">Email enviado...</string>
     <string name="msg_email_nao_cadastrado">Esse endereço de email, não foi cadastado.</string>
     <string name="msg_salvando_produto">Salvando Produto</string>
+    <string name="msg_salvando_alergenicos">Salvando Alergênicos</string>
     <string name="msg_produto_salvo">Produto salvo com sucesso</string>
     <string name="msg_imagem_null">Ops.. Erro ao recuperar imagem, tente novamente.</string>
     <string name="msg_nao">Não</string>
@@ -245,7 +246,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-
 
 
 </resources>

@@ -3,9 +3,13 @@ package br.com.alimentar.alergia.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by gilmar on 20/10/16.
@@ -89,5 +93,26 @@ public class Produto implements Parcelable{
         parcel.writeString(status);
         parcel.writeString(uid_user);
         parcel.writeTypedList(substancias);
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("nome", nome);
+        result.put("fabricatente", fabricatente);
+        result.put("codigo_barra", codigo_barra);
+        result.put("categoria", categoria);
+        result.put("imagem", imagem);
+        result.put("data", data);
+        result.put("status", status);
+        result.put("uid_user", uid_user);
+
+        Map<String, Object> substanciasList = new HashMap<>();
+        for (int i = 0; i < substancias.size(); i++) {
+            Map<String, Object> substanciasMap = new ObjectMapper().convertValue(substancias.get(i), Map.class);
+            substanciasList.put(String.valueOf(i), substanciasMap);
+        }
+        result.put("substancias",  substanciasList);
+        return result;
     }
 }

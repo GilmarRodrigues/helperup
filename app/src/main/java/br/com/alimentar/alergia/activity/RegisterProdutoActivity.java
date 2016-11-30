@@ -44,6 +44,7 @@ import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CustomBottomSheetDialogFragment;
 import br.com.alimentar.alergia.model.Produto;
 import br.com.alimentar.alergia.model.Tabelas;
+import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.validator.ProdutoValidator;
 import br.com.alimentar.alergia.view.CustomAutoCompleteTextView;
@@ -78,6 +79,7 @@ public class RegisterProdutoActivity extends BaseActivity {
     private int mPositionSelectorCategoria = 0;
     private String mCategorias[] = null;
     private String mFabricas[] = null;
+    private String mProdutoKey;
 
 
     @Override
@@ -187,7 +189,7 @@ public class RegisterProdutoActivity extends BaseActivity {
 
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
+                            mProdutoKey = dataSnapshot.getKey();
                             if(flag) {
                                 for (DataSnapshot produto : dataSnapshot.getChildren()) {
                                     if (codigo_barra.equals(produto.child("codigo_barra").getValue(String.class))) {
@@ -202,15 +204,22 @@ public class RegisterProdutoActivity extends BaseActivity {
                             if (flag) {
                                 mDatabaseUser.addValueEventListener(new ValueEventListener() {
                                     @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid());
+                                    public void onDataChange(final DataSnapshot dataSnapshot) {
+                                        final Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid());
                                         newProduto.setValue(produto).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(RegisterProdutoActivity.this, getString(R.string.msg_produto_salvo), Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(RegisterProdutoActivity.this, getString(R.string.msg_produto_salvo), Toast.LENGTH_SHORT).show();
                                                     hideProgressDialog();
-                                                    finish();
+                                                    //finish();
+
+                                                    Intent mainIntent = new Intent(RegisterProdutoActivity.this, RegisterSubstanciaProdutoActivity.class);
+                                                    mainIntent.putExtra(Produto.KEY, produto);
+                                                    //mainIntent.putExtra("key", mProdutoKey);
+                                                    //Log.i("Script", "KEY " + mProdutoKey);
+                                                    startActivity(mainIntent);
+                                                    AndroidUtils.closeVirtualKeyboard(RegisterProdutoActivity.this, campo_nome);
                                                 } else {
                                                     hideProgressDialog();
                                                 }
