@@ -45,7 +45,7 @@
                 android:value=".activity.ViewPageActivity" />
         </activity>
         <activity
-            android:name=".activity.SubstanciasActivity"
+            android:name=".activity.RegisterSubstanciasUserActivity"
             android:label="@string/activity_substancias" />
         <activity
             android:name=".activity.ViewPageActivity"

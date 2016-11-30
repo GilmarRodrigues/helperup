@@ -23,7 +23,7 @@ import br.com.alimentar.alergia.model.Substancia;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
 
-public class SubstanciasActivity extends BaseActivity {
+public class RegisterSubstanciasUserActivity extends BaseActivity {
     private DatabaseReference mDatabaseUser;
     private FirebaseAuth mAuth;
     private ListView mListView;
@@ -33,7 +33,7 @@ public class SubstanciasActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_substancias);
+        setContentView(R.layout.activity_register_substancias_user);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
@@ -61,7 +61,7 @@ public class SubstanciasActivity extends BaseActivity {
                     current_user_db.setValue(user);
                 }
 
-                Intent mainIntent = new Intent(SubstanciasActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(RegisterSubstanciasUserActivity.this, MainActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
             }
@@ -104,7 +104,7 @@ public class SubstanciasActivity extends BaseActivity {
                         }
                     }
 
-                    Intent mainIntent = new Intent(SubstanciasActivity.this, MainActivity.class);
+                    Intent mainIntent = new Intent(RegisterSubstanciasUserActivity.this, MainActivity.class);
                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(mainIntent);
                 }

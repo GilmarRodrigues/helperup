@@ -1,12 +1,9 @@
 package br.com.alimentar.alergia.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -153,7 +150,7 @@ public class GoogleActivity extends BaseActivity {
                                 task.getResult().getUser().getEmail(),
                                 task.getResult().getUser().getPhotoUrl().toString());
 
-                        Intent mainIntent = new Intent(GoogleActivity.this, SubstanciasActivity.class);
+                        Intent mainIntent = new Intent(GoogleActivity.this, RegisterSubstanciasUserActivity.class);
                         mainIntent.putExtra(User.KEY, user);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);

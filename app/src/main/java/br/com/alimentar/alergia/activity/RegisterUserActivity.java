@@ -162,7 +162,7 @@ public class RegisterUserActivity extends GoogleActivity {
 
                         hideProgressDialog();
 
-                        Intent mainIntent = new Intent(RegisterUserActivity.this, SubstanciasActivity.class);
+                        Intent mainIntent = new Intent(RegisterUserActivity.this, RegisterSubstanciasUserActivity.class);
                         mainIntent.putExtra(User.KEY, user);
                         //mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(mainIntent);
