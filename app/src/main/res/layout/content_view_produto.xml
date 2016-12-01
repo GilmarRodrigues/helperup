@@ -63,10 +63,21 @@
             android:paddingBottom="5dp"/>
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider_dois"
             android:layout_below="@+id/tv_alergenicos"/>
+
+        <LinearLayout
+            android:id="@+id/llt_alergenicos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/view"
+            android:layout_marginTop="10dp">
+
+        </LinearLayout>
 
     </RelativeLayout>
 
