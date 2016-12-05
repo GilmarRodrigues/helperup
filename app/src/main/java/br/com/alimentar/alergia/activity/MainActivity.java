@@ -1,6 +1,5 @@
 package br.com.alimentar.alergia.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,12 +10,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,24 +33,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.util.ArrayList;
-
 import br.com.alimentar.alergia.R;
+import br.com.alimentar.alergia.fragment.CategoriaFragment;
 import br.com.alimentar.alergia.fragment.HomeFragment;
-import br.com.alimentar.alergia.model.Produto;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
-import static android.R.attr.key;
-import static br.com.alimentar.alergia.R.id.nav_cartilha;
 import static br.com.alimentar.alergia.R.id.nav_categoria;
 import static br.com.alimentar.alergia.R.id.nav_configuracoes;
-import static br.com.alimentar.alergia.R.id.nav_favorito;
-import static br.com.alimentar.alergia.R.id.nav_perfil;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
-import static com.google.android.gms.internal.zzapz.boo;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
@@ -96,13 +88,21 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
         setUser(headerView);
+        headerView.findViewById(R.id.iv_perfil).setOnClickListener(onClickPerfil());
+        headerView.findViewById(R.id.nav_drawer_header).setOnClickListener(onClickPerfil());
 
         setFirstItemNavigationView(navigationView);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
 
-        // AQUI
-        //alertDialog(this, R.string.aguarde, R.string.menu_boottom_sheet_camera, onClickPositive());
+    private View.OnClickListener onClickPerfil() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        };
     }
 
     private void setUser(View headerView) {
@@ -198,14 +198,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 replaceFragment(new HomeFragment());
                 break;
             case nav_categoria:
+                replaceFragment(new CategoriaFragment());
                 break;
-            case nav_favorito:
+            /*case nav_favorito:
                 break;
             case nav_cartilha:
                 break;
             case nav_perfil:
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                break;
+                break;*/
             case nav_configuracoes:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;

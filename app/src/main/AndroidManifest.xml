@@ -85,6 +85,16 @@
                 android:value="br.com.alimentar.alergia.activity.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".activity.ViewProdutoActivity"
+            android:label="@string/title_activity_view_produto"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".activity.RegisterSubstanciaProdutoActivity" />
+
+        <activity android:name=".activity.CategoriasActivity"
+            android:label="@string/title_activity_categorias"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <!-- Imagem Crop -->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -98,23 +108,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".activity.ViewProdutoActivity"
-            android:label="@string/title_activity_view_produto"
-            android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.alimentar.alergia.activity.MainActivity" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.RegisterSubstanciaProdutoActivity"></activity>
     </application>
 
 </manifest>

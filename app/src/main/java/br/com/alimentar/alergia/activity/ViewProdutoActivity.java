@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,9 +60,10 @@ public class ViewProdutoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_produto);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseProduto = FirebaseDatabase.getInstance().getReference().child(Tabelas.PRODUTO);
@@ -105,8 +107,9 @@ public class ViewProdutoActivity extends BaseActivity {
 
                     mAlergenicos = new ArrayList<String>();
                     for (int i = 0; i < Tabelas.addSubstancias(getBaseContext()).size(); i++) {
-                        String alergenico = dataSnapshot.child("substancias").child(String.valueOf(i)).child("status").getValue().toString();
-                        if (alergenico != null || alergenico.equals(null)) {
+                        String value = (String) dataSnapshot.child("substancias").child(String.valueOf(i)).child("status").getValue();
+                        String alergenico = (String) dataSnapshot.child("substancias").child(String.valueOf(i)).child("status").getValue();
+                        if (alergenico != null) {
                             if (getString(R.string.const_contem).equals(alergenico)) {
                                 mAlergenicos.add(dataSnapshot.child("substancias").child(String.valueOf(i)).child("nome").getValue().toString());
                             }
@@ -208,6 +211,13 @@ public class ViewProdutoActivity extends BaseActivity {
                 }
             });
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

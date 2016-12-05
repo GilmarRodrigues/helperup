@@ -11,6 +11,7 @@
     <string name="activity_settings">Configurações</string>
     <string name="title_activity_register_produto"></string>
     <string name="title_activity_view_produto">ViewProdutoActivity</string>
+    <string name="title_activity_categorias">Categoria</string>
 
     <!-- Botões -->
     <string name="btn_sign_in">ENTRAR</string>

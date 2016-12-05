@@ -1,7 +1,6 @@
 package br.com.alimentar.alergia.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.model.Item;
-
-import static com.google.android.gms.internal.zznu.it;
 
 /**
  * Created by gilmar on 24/10/16.

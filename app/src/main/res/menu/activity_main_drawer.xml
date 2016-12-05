@@ -10,23 +10,23 @@
             android:id="@+id/nav_categoria"
             android:icon="@drawable/ic_categoria"
             android:title="@string/menu_drawer_categoria" />
-        <item
+        <!--item
             android:id="@+id/nav_favorito"
             android:icon="@drawable/ic_favorito"
             android:title="@string/menu_drawer_favorito" />
         <item
             android:id="@+id/nav_cartilha"
             android:icon="@drawable/ic_cartilha"
-            android:title="@string/menu_drawer_cartilha" />
+            android:title="@string/menu_drawer_cartilha" /-->
 
     </group>
 
     <item android:title="Extras">
         <menu>
-            <item
+            <!--item
                 android:id="@+id/nav_perfil"
                 android:icon="@drawable/ic_perfil"
-                android:title="@string/menu_drawer_perfil" />
+                android:title="@string/menu_drawer_perfil" /-->
             <item
                 android:id="@+id/nav_configuracoes"
                 android:icon="@drawable/ic_configuracoes"
