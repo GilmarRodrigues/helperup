@@ -68,11 +68,6 @@ public class UpdateAlergenicosDialog extends BaseDialog {
         mListView = (ListView) view.findViewById(R.id.list_view);
         mListView.setAdapter(new SubstanciasAdapter(getActivity(), onClickSwitch(), mUser.substancias));
 
-        //campo_nome = (TextView) view.findViewById(edit_nome);
-        if (mUser != null) {
-            //campo_nome.setText(mUser.nome);
-        }
-
         view.findViewById(R.id.btn_salvar).setOnClickListener(onClickSalvar());
         view.findViewById(R.id.btn_cancelar).setOnClickListener(onClickCancelar());
 
