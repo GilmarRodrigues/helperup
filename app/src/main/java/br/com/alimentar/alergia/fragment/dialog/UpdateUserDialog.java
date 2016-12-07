@@ -85,7 +85,7 @@ public class UpdateUserDialog extends BaseDialog {
 
                 if (!validator()) {
 
-                    showProgressDialog(R.string.msg_update_user);
+                    showProgressDialog(R.string.msg_update);
                     mUser.nome = campo_nome.getText().toString();
 
                     mDatabaseUser.addValueEventListener(new ValueEventListener() {
@@ -101,6 +101,7 @@ public class UpdateUserDialog extends BaseDialog {
                                 if (callback != null) {
                                     callback.onUserUpdate(mUser);
                                 }
+                                hideProgressDialog();
                             }
                             dismiss();
 
@@ -112,7 +113,6 @@ public class UpdateUserDialog extends BaseDialog {
 
                         }
                     });
-                    hideProgressDialog();
                 }
             }
         };

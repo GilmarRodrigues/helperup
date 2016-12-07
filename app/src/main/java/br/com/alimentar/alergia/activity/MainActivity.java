@@ -50,6 +50,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
     private GoogleApiClient client;
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +86,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
-        setUser(headerView);
         headerView.findViewById(R.id.iv_perfil).setOnClickListener(onClickPerfil());
         headerView.findViewById(R.id.nav_drawer_header).setOnClickListener(onClickPerfil());
 
         setFirstItemNavigationView(navigationView);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUser(headerView);
     }
 
     private View.OnClickListener onClickPerfil() {

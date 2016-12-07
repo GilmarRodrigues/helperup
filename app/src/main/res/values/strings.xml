@@ -60,7 +60,7 @@
     <string name="msg_produto_ja_possui_um_cadastro">Esse produto já possui um cadastro. Gostaria de ver?</string>
     <string name="msg_remove">Deseja remover esse produto?</string>
     <string name="msg_remove_sucesso">Removido com sucesso!</string>
-    <string name="msg_update_user">Atualizando Usuario.</string>
+    <string name="msg_update">Atualizando</string>
 
     <!-- Substancias -->
     <string name="substancia_leite">LEITE</string>
