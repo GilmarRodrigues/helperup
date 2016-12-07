@@ -12,4 +12,6 @@
     <dimen name="userPhoto_layout_height">64dp</dimen>
     <dimen name="app_bar_height">220dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="popup_width">320dp</dimen>
+    <dimen name="popup_heigth">330dp</dimen>
 </resources>

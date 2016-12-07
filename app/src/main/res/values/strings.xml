@@ -24,6 +24,7 @@
     <string name="btn_cadastrar_se">CADASTRAR-SE</string>
     <string name="btn_enviar">ENVIAR</string>
     <string name="btn_proximo">PRÓXIMO</string>
+    <string name="btn_cancelar">CANCELAR</string>
 
     <!-- menu -->
     <string name="action_search">Pesquisar</string>
@@ -59,6 +60,7 @@
     <string name="msg_produto_ja_possui_um_cadastro">Esse produto já possui um cadastro. Gostaria de ver?</string>
     <string name="msg_remove">Deseja remover esse produto?</string>
     <string name="msg_remove_sucesso">Removido com sucesso!</string>
+    <string name="msg_update_user">Atualizando Usuario.</string>
 
     <!-- Substancias -->
     <string name="substancia_leite">LEITE</string>
@@ -249,6 +251,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-
 
 </resources>
