@@ -14,8 +14,8 @@ import br.com.alimentar.alergia.R;
 public class Tabelas {
     public static final String USUARIO = "Usuario";
     public static final String PRODUTO = "Produto";
-    public static final String IMAGEM_PERFIL = "Perfil_Imagem";
-    public static final String IMAGEM_PRODUTO = "Perfil_Produto";
+    public static final String IMAGEM_PERFIL = "Perfil";
+    public static final String IMAGEM_PRODUTO = "Produto";
     public static final String DEFAULT = "default";
 
     public static List<Substancia> addSubstancias(Context context) {
