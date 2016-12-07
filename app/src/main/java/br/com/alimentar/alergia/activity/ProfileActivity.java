@@ -1,22 +1,17 @@
 package br.com.alimentar.alergia.activity;
 
-import android.app.Dialog;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,21 +24,20 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CustomBottomSheetDialogFragment;
+import br.com.alimentar.alergia.fragment.dialog.UpdateAlergenicosDialog;
 import br.com.alimentar.alergia.fragment.dialog.UpdateUserDialog;
+import br.com.alimentar.alergia.model.Substancia;
 import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.model.User;
-import br.com.alimentar.alergia.view.RoundedImageView;
 import id.zelory.compressor.Compressor;
 import id.zelory.compressor.FileUtil;
-
-import static android.R.attr.key;
-import static br.com.alimentar.alergia.R.id.iv_produto;
-import static br.com.alimentar.alergia.R.id.up;
 
 public class ProfileActivity extends BaseActivity {
     private DatabaseReference mDatabaseUser;
@@ -56,6 +50,7 @@ public class ProfileActivity extends BaseActivity {
     private ImageView iv_perfil;
     private Uri mImagemUri = null;
     private String key;
+    private LinearLayout mLLAlergenicos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +65,20 @@ public class ProfileActivity extends BaseActivity {
         key = mAuth.getCurrentUser().getUid();
 
         findViewById(R.id.iv_editar_perfil).setOnClickListener(onClickUpdateUser());
+        findViewById(R.id.iv_editar_alergenicos).setOnClickListener(onClickUpdateAlergenicos());
 
         setUser();
 
         iv_perfil.setOnClickListener(onClickUpdateImageUser());
+    }
+
+    private View.OnClickListener onClickUpdateAlergenicos() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateAlergenicos();
+            }
+        };
     }
 
     private View.OnClickListener onClickUpdateImageUser() {
@@ -100,6 +105,7 @@ public class ProfileActivity extends BaseActivity {
         tv_email = (TextView) findViewById(R.id.tv_email);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         iv_perfil = (ImageView) findViewById(R.id.iv_perfil);
+        mLLAlergenicos = (LinearLayout) findViewById(R.id.llt_alergenicos);
 
         mDatabaseUser.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -113,6 +119,16 @@ public class ProfileActivity extends BaseActivity {
                 } else {
                     progressBar.setVisibility(View.INVISIBLE);
                     Log.i(TAG, "Foto: " + mUser.imagem);
+                }
+
+                List<Substancia> substancias = mUser.substancias;
+                for (int i=0; i <substancias.size(); i++) {
+                    if (substancias.get(i).status.equals(getString(R.string.const_contem))) {
+                        TextView tv_alergenico = new TextView(ProfileActivity.this);
+                        tv_alergenico.setPadding(0, 0, 0, 15);
+                        tv_alergenico.setText(substancias.get(i).nome);
+                        mLLAlergenicos.addView(tv_alergenico);
+                    }
                 }
 
             }
@@ -189,6 +205,23 @@ public class ProfileActivity extends BaseActivity {
                     }
                 } else {
                     Snackbar.make(v, getString(R.string.msg_imagem_null), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
+            }
+        });
+    }
+
+    private void updateAlergenicos() {
+        UpdateAlergenicosDialog.show(getSupportFragmentManager(), mUser, new UpdateAlergenicosDialog.Callback() {
+            @Override
+            public void onAlergenicosUpdate(List<Substancia> alergenicos) {
+                mLLAlergenicos.removeAllViews();
+                for (int i=0; i <alergenicos.size(); i++) {
+                    if (alergenicos.get(i).status.equals(getString(R.string.const_contem))) {
+                        TextView tv_alergenico = new TextView(ProfileActivity.this);
+                        tv_alergenico.setPadding(0, 0, 0, 15);
+                        tv_alergenico.setText(alergenicos.get(i).nome);
+                        mLLAlergenicos.addView(tv_alergenico);
+                    }
                 }
             }
         });
