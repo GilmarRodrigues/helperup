@@ -57,7 +57,7 @@ public class RegisterSubstanciasUserActivity extends BaseActivity {
                 if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
                     final String key = mAuth.getCurrentUser().getUid();
                     DatabaseReference current_user_db = mDatabaseUser.child(key);
-                    User user = new User(mUser.nome, mUser.email, mUser.imagem);
+                    User user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                     current_user_db.setValue(user);
                 }
 

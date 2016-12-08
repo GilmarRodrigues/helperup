@@ -205,7 +205,7 @@ public class RegisterProdutoActivity extends BaseActivity {
                                 mDatabaseUser.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(final DataSnapshot dataSnapshot) {
-                                        final Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid());
+                                        final Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid(), Tabelas.addSubstancias(getBaseContext()));
                                         newProduto.setValue(produto).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -328,11 +328,7 @@ public class RegisterProdutoActivity extends BaseActivity {
     }
 
     private void setCategorias() {
-        mCategorias = new String[]{getString(R.string.categoria_selecione_item), getString(R.string.categoria_bebidas),
-                getString(R.string.categoria_biscoitos), getString(R.string.categoria_congelados), getString(R.string.categoria_doces_sobremesas),
-                getString(R.string.categoria_enlatados), getString(R.string.categoria_graos_cereais), getString(R.string.categoria_leite),
-                getString(R.string.categoria_iorgute), getString(R.string.categoria_massa), getString(R.string.categoria_paes),
-                getString(R.string.categoria_bolos), getString(R.string.categoria_queijo_frios)};
+        mCategorias = Tabelas.addCategorias(this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.simple_spinner_item, mCategorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

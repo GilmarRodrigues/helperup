@@ -15,17 +15,15 @@ import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.activity.CategoriasActivity;
 import br.com.alimentar.alergia.model.Tabelas;
 
+import static br.com.alimentar.alergia.R.id.view;
+
 public class CategoriaFragment extends Fragment {
     private String[] mCategorias;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mCategorias = new String[]{getString(R.string.categoria_bebidas), getString(R.string.categoria_biscoitos),
-                getString(R.string.categoria_congelados), getString(R.string.categoria_doces_sobremesas),
-                getString(R.string.categoria_enlatados), getString(R.string.categoria_graos_cereais), getString(R.string.categoria_leite),
-                getString(R.string.categoria_iorgute), getString(R.string.categoria_massa), getString(R.string.categoria_paes),
-                getString(R.string.categoria_bolos), getString(R.string.categoria_queijo_frios)};
+        mCategorias = Tabelas.addCategorias(getActivity());
 
         View view = inflater.inflate(R.layout.fragment_categoria, container, false);
 

@@ -148,7 +148,8 @@ public class GoogleActivity extends BaseActivity {
 
                         User user = new User(task.getResult().getUser().getDisplayName(),
                                 task.getResult().getUser().getEmail(),
-                                task.getResult().getUser().getPhotoUrl().toString());
+                                task.getResult().getUser().getPhotoUrl().toString(),
+                                Tabelas.addSubstancias(getBaseContext()));
 
                         Intent mainIntent = new Intent(GoogleActivity.this, RegisterSubstanciasUserActivity.class);
                         mainIntent.putExtra(User.KEY, user);

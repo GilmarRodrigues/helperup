@@ -152,6 +152,8 @@
     <string name="categoria_paes">Pães</string>
     <string name="categoria_bolos">Bolos</string>
     <string name="categoria_queijo_frios">Queijo e frios</string>
+    <string name="categoria_salgadinhos">Salgadinhos</string>
+    <string name="categoria_outros">Outros</string>
 
     <!-- Fabricas-->
     <string name="fabrica_coca_cola">Coca-Cola</string>
