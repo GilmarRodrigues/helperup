@@ -168,7 +168,7 @@
                         android:text="|" />
 
                     <TextView
-                        android:id="@+id/tv_politica_privatizacao"
+                        android:id="@+id/tv_politica_privacidade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

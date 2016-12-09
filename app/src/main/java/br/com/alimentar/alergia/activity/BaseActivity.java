@@ -53,7 +53,6 @@ import static android.R.attr.value;
 public class BaseActivity extends AppCompatActivity {
     protected static final String TAG = "Alergia";
     protected ProgressDialog mProgressDialog;
-    //protected ProgressBar mProgressBar;
 
     protected Toolbar setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -212,18 +211,9 @@ public class BaseActivity extends AppCompatActivity {
                 for (DataSnapshot produto: dataSnapshot.getChildren()) {
                     if (codigoBarra.equals(produto.child("codigo_barra").getValue(String.class))) {
                         key[0] = produto.getKey();
-                        Log.i("Script", "KEY 1 " + key[0]);
                         break;
                     }
-                    //String codigoBarra = produto.child("codigo_barra").getValue(String.class);
-                    //list.add(codigoBarra);
                 }
-                //if (list.contains(codigoBarra)) {
-                    //AndroidUtils.alertDialog(BaseActivity.this, "Atenção!!", "Esse produto já foi cadastrado");
-                //} else {
-
-                  //  Log.i("Script", "Não existe");
-                //}
             }
 
             @Override
@@ -231,8 +221,13 @@ public class BaseActivity extends AppCompatActivity {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
         });
-        Log.i("Script", "KEY 2 " + key[0]);
 
         return key[0];
+    }
+
+    protected void browser(String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }

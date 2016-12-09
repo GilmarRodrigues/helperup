@@ -26,13 +26,7 @@ public class RegisterUserActivity extends GoogleActivity {
     private CustomEditText campo_nome;
     private CustomEditText campo_email;
     private CustomEditText campo_senha;
-    //private ImageView mImagemPerfil;
-    //private ProgressDialog mProgress;
-    //private FirebaseAuth mAuth;
-    //private DatabaseReference mDatabase;
-    //private StorageReference mStorageImage;
-    //private Uri mImageUri = null;
-    private static final int GALLERRY_REQUEST = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +38,6 @@ public class RegisterUserActivity extends GoogleActivity {
 
         mGoogleBtn = (SignInButton) findViewById(R.id.google_sign_in_btn);
         mGoogleBtn.setOnClickListener(onClickSingIn());
-
-        /*mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(Tabelas.USUARIO);
-        mDatabase.keepSynced(true);
-        mStorageImage = FirebaseStorage.getInstance().getReference().child("Perfil_imagem");*/
 
         campo_nome = (CustomEditText) findViewById(R.id.edit_nome);
         campo_nome.setOnClickListener(onFocusNome());
@@ -63,13 +52,31 @@ public class RegisterUserActivity extends GoogleActivity {
         mReLayoutOU = (RelativeLayout) findViewById(R.id.rl_ou);
         mLayoutForm = (LinearLayout) findViewById(R.id.login_form);
 
-        //mImagemPerfil = (ImageView) findViewById(R.id.iv_perfil);
-        //mImagemPerfil.setOnClickListener(onClickImagePerfil());
 
         findViewById(R.id.salvarBtn).setOnClickListener(onClickSalvar());
         findViewById(R.id.text_entrar).setOnClickListener(onClickEntrar());
+        findViewById(R.id.tv_termos_uso).setOnClickListener(onClickTermosDeUso());
+        findViewById(R.id.tv_politica_privacidade).setOnClickListener(onClickPoliticaPrivacidade());
 
         setGooglePlusButtonText(mGoogleBtn, getString(R.string.btn_cadastrar_com_google));
+    }
+
+    private View.OnClickListener onClickTermosDeUso() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                browser(Tabelas.URL_TERMOS_DE_USO);
+            }
+        };
+    }
+
+    private View.OnClickListener onClickPoliticaPrivacidade() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                browser(Tabelas.URL_POLITICA_PRIVACIDADE);
+            }
+        };
     }
 
     private View.OnClickListener onClickEntrar() {
@@ -80,17 +87,6 @@ public class RegisterUserActivity extends GoogleActivity {
             }
         };
     }
-
-    /*private View.OnClickListener onClickImagePerfil() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, GALLERRY_REQUEST);
-            }
-        };
-    }*/
 
     private CustomEditText.OnClickKeyPreItem onEscondeTeclado() {
         return new CustomEditText.OnClickKeyPreItem() {
@@ -164,32 +160,11 @@ public class RegisterUserActivity extends GoogleActivity {
 
                         Intent mainIntent = new Intent(RegisterUserActivity.this, RegisterSubstanciasUserActivity.class);
                         mainIntent.putExtra(User.KEY, user);
-                        //mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(mainIntent);
                         AndroidUtils.closeVirtualKeyboard(RegisterUserActivity.this, campo_senha);
 
-                        //StorageReference filepath = mStorageImage.child(mImageUri.getLastPathSegment());
-
-                        /*filepath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                String user_id = mAuth.getCurrentUser().getUid();
-                                DatabaseReference current_user_db = mDatabase.child(user_id);
-
-                                String downloadUri = taskSnapshot.getDownloadUrl().toString();
-
-                                current_user_db.child("nome").setValue(nome);
-                                current_user_db.child("email").setValue(email);
-                                current_user_db.child("fone").setValue(Tabelas.DEFAULT);
-                                current_user_db.child("image").setValue(downloadUri);
-
-
-                            }
-                        });*/
                     } else {
                         Toast.makeText(RegisterUserActivity.this, getString(R.string.error_email_ja_cadastrado), Toast.LENGTH_SHORT).show();
-                        //mProgress.dismiss();
                         hideProgressDialog();
                     }
                 }
@@ -197,28 +172,6 @@ public class RegisterUserActivity extends GoogleActivity {
         }
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERRY_REQUEST && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                mImageUri = result.getUri();
-                mImagemPerfil.setImageURI(mImageUri);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-            }
-        }
-
-    }*/
 
     private boolean validator() {
         campo_nome.setError(null);

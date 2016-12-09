@@ -1,6 +1,7 @@
 package br.com.alimentar.alergia.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.alimentar.alergia.R;
+import br.com.alimentar.alergia.model.Tabelas;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 
 public class SettingsActivity extends BaseActivity {
@@ -52,7 +54,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                browser(Tabelas.URL_SUPPORT);
             }
         };
     }
@@ -61,7 +63,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                browser(Tabelas.URL_TERMOS_DE_USO);
             }
         };
     }
@@ -70,7 +72,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                browser(Tabelas.URL_POLITICA_PRIVACIDADE);
             }
         };
     }
@@ -79,7 +81,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                browser(Tabelas.URL_FACEBOOK);
             }
         };
     }
@@ -88,7 +90,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                browser(Tabelas.URL_TWITTER);
             }
         };
     }
@@ -98,7 +100,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                share();
             }
         };
     }
@@ -107,7 +109,7 @@ public class SettingsActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                googlePlay();
             }
         };
     }
@@ -135,5 +137,21 @@ public class SettingsActivity extends BaseActivity {
         }
     }
 
+    private void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + ": " + "http://play.google.com/store/apps/details?id=" + Tabelas.APP_PACKAGER_NAME);
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent, getString(R.string.msg_compartilhar)));
+    }
+
+    private void googlePlay() {
+        Intent irGooglePlay;
+        try {
+            irGooglePlay = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + Tabelas.APP_PACKAGER_NAME));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            irGooglePlay = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + Tabelas.APP_PACKAGER_NAME));
+        }
+        startActivity(irGooglePlay);
+    }
 
 }

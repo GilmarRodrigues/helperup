@@ -352,8 +352,7 @@ public class RegisterProdutoActivity extends BaseActivity {
     }
 
     private void setAutoCompleteFabrica() {
-        mFabricas = new String[]{getString(R.string.fabrica_kuat), getString(R.string.fabrica_coca_cola), getString(R.string.fabrica_fanta), getString(R.string.fabrica_pepsi),
-                getString(R.string.fabrica_guarana_antartica), getString(R.string.fabrica_sukita), getString(R.string.fabrica_sprite)};
+        mFabricas = Tabelas.addFabricantes(getBaseContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mFabricas);
         campo_fabricante.setAdapter(adapter);
     }
