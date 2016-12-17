@@ -152,7 +152,6 @@ public class RegisterUserActivity extends GoogleActivity {
                         String user_id = mAuth.getCurrentUser().getUid();
                         DatabaseReference current_user_db = mDatabaseUsuario.child(user_id);
 
-
                         User user = new User(nome, email, Tabelas.DEFAULT, Tabelas.addSubstancias(getBaseContext()));
                         current_user_db.setValue(user);
 

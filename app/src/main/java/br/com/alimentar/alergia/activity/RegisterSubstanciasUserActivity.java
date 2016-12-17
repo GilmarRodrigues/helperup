@@ -83,21 +83,19 @@ public class RegisterSubstanciasUserActivity extends BaseActivity {
         showProgressDialog(R.string.realizando_cadastro);
         if (mSubstanciasSwitch.size() > 0) {
 
-            if (mUser.imagem.equals(Tabelas.DEFAULT)) {
-                User user = new User(mUser.nome, mUser.email, Tabelas.DEFAULT, mSubstanciasSwitch);
+            //if (mUser.imagem.equals(Tabelas.DEFAULT)) {
+                User user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                 Map<String, Object> postValue = user.toMap();
                 Map<String, Object> childUpdates = new HashMap<String, Object>();
                 //Map<String, Object> hashtaghMap = new ObjectMapper().convertValue(childUpdates, Map.class);
                 childUpdates.put(key, postValue);
                 mDatabaseUser.updateChildren(childUpdates);
-            }
-        } else {
-            if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
+
+            /*} else if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
                 DatabaseReference current_user_db = mDatabaseUser.child(key);
                 User user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                 current_user_db.setValue(user);
-            }
-
+            }*/
         }
         hideProgressDialog();
 
