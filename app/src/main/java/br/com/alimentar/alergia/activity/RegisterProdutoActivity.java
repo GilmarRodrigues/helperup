@@ -210,14 +210,10 @@ public class RegisterProdutoActivity extends BaseActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    //Toast.makeText(RegisterProdutoActivity.this, getString(R.string.msg_produto_salvo), Toast.LENGTH_SHORT).show();
                                                     hideProgressDialog();
-                                                    //finish();
 
                                                     Intent mainIntent = new Intent(RegisterProdutoActivity.this, RegisterSubstanciaProdutoActivity.class);
                                                     mainIntent.putExtra(Produto.KEY, produto);
-                                                    //mainIntent.putExtra("key", mProdutoKey);
-                                                    //Log.i("Script", "KEY " + mProdutoKey);
                                                     startActivity(mainIntent);
                                                     AndroidUtils.closeVirtualKeyboard(RegisterProdutoActivity.this, campo_nome);
                                                 } else {

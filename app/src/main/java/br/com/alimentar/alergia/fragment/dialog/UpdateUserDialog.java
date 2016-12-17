@@ -81,38 +81,19 @@ public class UpdateUserDialog extends BaseDialog {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String key = mAuth.getCurrentUser().getUid();
+                final String uid = mAuth.getCurrentUser().getUid();
 
                 if (!validator()) {
-
                     showProgressDialog(R.string.msg_update);
-                    mUser.nome = campo_nome.getText().toString();
 
-                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChild(key)) {
-                                User user = new User(mUser.nome, mUser.email, mUser.imagem, mUser.substancias);
-                                Map<String, Object> postValue = user.toMap();
-                                Map<String, Object> childUpdates = new HashMap<String, Object>();
-                                childUpdates.put(key, postValue);
-                                mDatabaseUser.updateChildren(childUpdates);
+                    User user = updateUser(uid);
+                    hideProgressDialog();
 
-                                if (callback != null) {
-                                    callback.onUserUpdate(mUser);
-                                }
-                                hideProgressDialog();
-                            }
-                            dismiss();
+                    if (callback != null) {
+                        callback.onUserUpdate(user);
+                    }
+                    dismiss();
 
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
                 }
             }
         };
@@ -125,6 +106,16 @@ public class UpdateUserDialog extends BaseDialog {
                 dismiss();
             }
         };
+    }
+
+    private User updateUser(String uid) {
+        User value = new User(campo_nome.getText().toString(), mUser.email, mUser.imagem, mUser.substancias);
+        Map<String, Object> postValue = value.toMap();
+        Map<String, Object> childUpdates = new HashMap<String, Object>();
+        childUpdates.put(uid, postValue);
+        mDatabaseUser.updateChildren(childUpdates);
+
+        return value;
     }
 
     private boolean validator() {

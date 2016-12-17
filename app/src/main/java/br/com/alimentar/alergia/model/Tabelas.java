@@ -22,7 +22,7 @@ public class Tabelas {
     public static final String URL_TERMOS_DE_USO = "http://up2apps.com.br/portifolio/help-up/termo-de-uso/";
     public static final String URL_FACEBOOK = "https://www.facebook.com/up2apps";
     public static final String URL_TWITTER = "https://twitter.com/up2apps";
-    public static final String APP_PACKAGER_NAME = "com.espiritas.preces";
+    public static final String APP_PACKAGER_NAME = "br.com.alimentar.alergia";
 
     public static List<Substancia> addSubstancias(Context context) {
         String[] substancias = {context.getString(R.string.substancia_leite), context.getString(R.string.substancia_ovo),

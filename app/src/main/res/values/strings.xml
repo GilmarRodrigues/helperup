@@ -1,6 +1,6 @@
 <resources>
     <!-- App -->
-    <string name="app_name">Alergia Alimentar</string>
+    <string name="app_name">help Up</string>
 
     <!-- Titulos telas -->
     <string name="activity_login">Fazer login</string>
@@ -135,10 +135,10 @@
     <string name="setting_politica_privacidade">Politica de privacidade</string>
     <string name="setting_redes_sociais">Redes sociais</string>
     <string name="setting_facebook">Curta Alegia no Facebook</string>
-    <string name="setting_twitter">Siga @Alergia no Twitter</string>
+    <string name="setting_twitter">Siga @help UP no Twitter</string>
     <string name="setting_ajude_comunidade">Ajude a comunidade</string>
     <string name="setting_convide_amigos">Convide amigos</string>
-    <string name="setting_avaliar">Avaliar o Alergia</string>
+    <string name="setting_avaliar">Avaliar o help UP</string>
     <string name="settin_sair">Sair</string>
 
     <!-- Categorias do produto -->

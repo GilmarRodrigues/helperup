@@ -49,7 +49,7 @@ public class ProfileActivity extends BaseActivity {
     private ProgressBar progressBar;
     private ImageView iv_perfil;
     private Uri mImagemUri = null;
-    private String key;
+    private String key_uid;
     private LinearLayout mLLAlergenicos;
 
     @Override
@@ -62,7 +62,7 @@ public class ProfileActivity extends BaseActivity {
         mStorage = FirebaseStorage.getInstance().getReference();
         mDatabaseUser.keepSynced(true);
 
-        key = mAuth.getCurrentUser().getUid();
+        key_uid = mAuth.getCurrentUser().getUid();
 
         findViewById(R.id.iv_editar_perfil).setOnClickListener(onClickUpdateUser());
         findViewById(R.id.iv_editar_alergenicos).setOnClickListener(onClickUpdateAlergenicos());
@@ -107,7 +107,7 @@ public class ProfileActivity extends BaseActivity {
         iv_perfil = (ImageView) findViewById(R.id.iv_perfil);
         mLLAlergenicos = (LinearLayout) findViewById(R.id.llt_alergenicos);
 
-        mDatabaseUser.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseUser.child(key_uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mUser = dataSnapshot.getValue(User.class);
@@ -122,7 +122,7 @@ public class ProfileActivity extends BaseActivity {
                 }
 
                 List<Substancia> substancias = mUser.substancias;
-                for (int i=0; i <substancias.size(); i++) {
+                for (int i = 0; i < substancias.size(); i++) {
                     if (substancias.get(i).status.equals(getString(R.string.const_contem))) {
                         TextView tv_alergenico = new TextView(ProfileActivity.this);
                         tv_alergenico.setPadding(0, 0, 0, 15);
@@ -152,35 +152,21 @@ public class ProfileActivity extends BaseActivity {
 
     private void updateImage(Uri uri) {
 
-
         showProgressDialog(R.string.msg_update);
-
         StorageReference filepath = mStorage.child(Tabelas.IMAGEM_PERFIL).child(uri.getLastPathSegment());
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                final User user = new User(mUser.nome, mUser.email, downloadUrl.toString(), mUser.substancias);
 
-                mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        final User user = new User(mUser.nome, mUser.email, downloadUrl.toString(), mUser.substancias);
+                Map<String, Object> postValue = user.toMap();
+                Map<String, Object> childUpdates = new HashMap<String, Object>();
+                childUpdates.put(key_uid, postValue);
+                mDatabaseUser.updateChildren(childUpdates);
+                mUser = user;
 
-                            if (dataSnapshot.hasChild(key)) {
-                                Map<String, Object> postValue = user.toMap();
-                                Map<String, Object> childUpdates = new HashMap<String, Object>();
-                                childUpdates.put(key, postValue);
-                                mDatabaseUser.updateChildren(childUpdates);
-                                mUser = user;
-                            }
-                        hideProgressDialog();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                hideProgressDialog();
 
             }
         });
@@ -215,7 +201,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onAlergenicosUpdate(List<Substancia> alergenicos) {
                 mLLAlergenicos.removeAllViews();
-                for (int i=0; i <alergenicos.size(); i++) {
+                for (int i = 0; i < alergenicos.size(); i++) {
                     if (alergenicos.get(i).status.equals(getString(R.string.const_contem))) {
                         TextView tv_alergenico = new TextView(ProfileActivity.this);
                         tv_alergenico.setPadding(0, 0, 0, 15);

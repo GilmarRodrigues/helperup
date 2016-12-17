@@ -59,7 +59,6 @@ public class RecuperarSenhaActivity extends BaseActivity {
 
     private void startRecuperarSenha() {
         final String email = campo_email.getText().toString().trim();
-        Log.i("Script", "startRecuperarSenha");
 
         if (!validator()) {
             mProgress.setTitle(getString(R.string.aguarde));
@@ -73,10 +72,8 @@ public class RecuperarSenhaActivity extends BaseActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(RecuperarSenhaActivity.this, getString(R.string.msg_enviar_email), Toast.LENGTH_SHORT).show();
-                                Log.i("Script", getString(R.string.msg_enviar_email));
                             } else {
                                 Toast.makeText(RecuperarSenhaActivity.this, getString(R.string.msg_email_nao_cadastrado), Toast.LENGTH_SHORT).show();
-                                Log.i("Script", getString(R.string.msg_email_nao_cadastrado));
                             }
                             mProgress.dismiss();
                         }

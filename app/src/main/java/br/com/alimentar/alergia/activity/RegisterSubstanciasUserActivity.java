@@ -80,43 +80,30 @@ public class RegisterSubstanciasUserActivity extends BaseActivity {
     private void startSubstancia() {
         final String key = mAuth.getCurrentUser().getUid();
 
+        showProgressDialog(R.string.realizando_cadastro);
         if (mSubstanciasSwitch.size() > 0) {
-            showProgressDialog(R.string.realizando_cadastro);
 
-            mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = null;
-                    if (dataSnapshot.hasChild(key)) {
-                        if (mUser.imagem.equals(Tabelas.DEFAULT)) {
-                            user = new User(mUser.nome, mUser.email, Tabelas.DEFAULT, mSubstanciasSwitch);
-                            Map<String, Object> postValue = user.toMap();
-                            Map<String, Object> childUpdates = new HashMap<String, Object>();
-                            //Map<String, Object> hashtaghMap = new ObjectMapper().convertValue(childUpdates, Map.class);
-                            childUpdates.put(key, postValue);
-                            mDatabaseUser.updateChildren(childUpdates);
-                        }
-                    } else {
-                        if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
-                            DatabaseReference current_user_db = mDatabaseUser.child(key);
-                            user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
-                            current_user_db.setValue(user);
-                        }
-                    }
+            if (mUser.imagem.equals(Tabelas.DEFAULT)) {
+                User user = new User(mUser.nome, mUser.email, Tabelas.DEFAULT, mSubstanciasSwitch);
+                Map<String, Object> postValue = user.toMap();
+                Map<String, Object> childUpdates = new HashMap<String, Object>();
+                //Map<String, Object> hashtaghMap = new ObjectMapper().convertValue(childUpdates, Map.class);
+                childUpdates.put(key, postValue);
+                mDatabaseUser.updateChildren(childUpdates);
+            }
+        } else {
+            if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
+                DatabaseReference current_user_db = mDatabaseUser.child(key);
+                User user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
+                current_user_db.setValue(user);
+            }
 
-                    Intent mainIntent = new Intent(RegisterSubstanciasUserActivity.this, MainActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-            });
-            hideProgressDialog();
         }
+        hideProgressDialog();
+
+        Intent mainIntent = new Intent(RegisterSubstanciasUserActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
     }
 
 
