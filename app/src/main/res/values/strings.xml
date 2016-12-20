@@ -36,6 +36,7 @@
     <string name="menu_drawer_favorito">Favoritos</string>
     <string name="menu_drawer_cartilha">Cartilha</string>
     <string name="menu_drawer_perfil">Perfil</string>
+    <string name="menu_adicionar_produto">Adicionar Produto</string>
     <string name="menu_drawer_configuracoes">Configurações</string>
     <string name="menu_boottom_sheet_camera">Camera</string>
     <string name="menu_boottom_sheet_galeria">Galeria</string>

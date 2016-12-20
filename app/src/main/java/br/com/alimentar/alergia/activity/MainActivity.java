@@ -214,10 +214,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             /*case nav_favorito:
                 break;
             case nav_cartilha:
-                break;
-            case nav_perfil:
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 break;*/
+            case R.id.nav_perfil:
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                break;
             case nav_configuracoes:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
