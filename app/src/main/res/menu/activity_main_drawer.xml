@@ -10,6 +10,10 @@
             android:id="@+id/nav_categoria"
             android:icon="@drawable/ic_categoria"
             android:title="@string/menu_drawer_categoria" />
+        <item
+            android:id="@+id/nav_adicionar_produto"
+            android:icon="@drawable/ic_favorito"
+            android:title="@string/menu_drawer_favorito" />
         <!--item
             android:id="@+id/nav_favorito"
             android:icon="@drawable/ic_favorito"

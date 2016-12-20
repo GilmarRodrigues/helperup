@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +40,7 @@ import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
+import static br.com.alimentar.alergia.R.id.nav_adicionar_produto;
 import static br.com.alimentar.alergia.R.id.nav_categoria;
 import static br.com.alimentar.alergia.R.id.nav_configuracoes;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
@@ -205,6 +205,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case nav_categoria:
                 replaceFragment(new CategoriaFragment());
+                break;
+            case nav_adicionar_produto:
+                Intent intent = new Intent(MainActivity.this, RegisterProdutoActivity.class);
+                intent.putExtra("codigo_barra", "");
+                startActivity(intent);
                 break;
             /*case nav_favorito:
                 break;
