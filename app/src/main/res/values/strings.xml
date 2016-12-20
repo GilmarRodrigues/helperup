@@ -101,7 +101,6 @@
     <string name="text_detalhes_perfil">DETALHES PERFIL</string>
     <string name="text_alergenicos">ALERGÊNICOS</string>
 
-
     <!-- validator -->
     <string name="error_field_required">Este campo é obrigatório</string>
     <string name="error_invalid_email">Este endereço de e-mail é inválido</string>
@@ -137,8 +136,8 @@
     <string name="setting_termos_uso">Termos de uso</string>
     <string name="setting_politica_privacidade">Politica de privacidade</string>
     <string name="setting_redes_sociais">Redes sociais</string>
-    <string name="setting_facebook">Curta Alegia no Facebook</string>
-    <string name="setting_twitter">Siga @help UP no Twitter</string>
+    <string name="setting_facebook">Curta UP2apps no Facebook</string>
+    <string name="setting_twitter">Siga @UP2apps no Twitter</string>
     <string name="setting_ajude_comunidade">Ajude a comunidade</string>
     <string name="setting_convide_amigos">Convide amigos</string>
     <string name="setting_avaliar">Avaliar o help UP</string>
