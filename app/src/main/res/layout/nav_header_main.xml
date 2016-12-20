@@ -30,7 +30,7 @@
             android:layout_height="@dimen/userPhoto_layout_height"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:src="@drawable/ic_img_perfil"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY" />
 
     </FrameLayout>
 

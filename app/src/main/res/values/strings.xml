@@ -64,14 +64,16 @@
     <string name="msg_compartilhar">Compartilhar</string>
 
     <!-- Substancias -->
+    <string name="substancia_amendorim">AMENDOIM</string>
+    <string name="substancia_cevada">CEVADA</string>
+    <string name="substancia_crustaceos">CRUSTÁCEOS OU FRUTOS DO MAR</string>
     <string name="substancia_leite">LEITE</string>
+    <string name="substancia_gluten">GLÚTEN</string>
     <string name="substancia_ovo">OVO</string>
     <string name="substancia_oleoginosas">OLEÁGINOSAS</string>
-    <string name="substancia_crustaceos">CRUSTÁCEOS OU FRUTOS DO MAR</string>
     <string name="substancia_peixe">PEIXE</string>
-    <string name="substancia_soja">SOJA</string>
+    <string name="substanciaf_soja">SOJA</string>
     <string name="substancia_trigo">TRIGO</string>
-    <string name="substancia_gluten">GLÚTEN</string>
 
     <!-- Constantes -->
     <string name="const_contem">Contem</string>
@@ -98,6 +100,7 @@
     <string name="text_categoria">Categoria</string>
     <string name="text_detalhes_perfil">DETALHES PERFIL</string>
     <string name="text_alergenicos">ALERGÊNICOS</string>
+
 
     <!-- validator -->
     <string name="error_field_required">Este campo é obrigatório</string>
@@ -145,15 +148,15 @@
     <string name="categoria_selecione_item">Selecione um item</string>
     <string name="categoria_bebidas">Bebidas</string>
     <string name="categoria_biscoitos">Biscoitos</string>
+    <string name="categoria_bolos">Bolos</string>
     <string name="categoria_congelados">Congelados</string>
     <string name="categoria_doces_sobremesas">Doces e sobremesas</string>
     <string name="categoria_enlatados">Enlatados</string>
     <string name="categoria_graos_cereais">Grãos e cereais</string>
-    <string name="categoria_leite">Leite</string>
     <string name="categoria_iorgute">Iorgute</string>
-    <string name="categoria_massa">Massa</string>
+    <string name="categoria_leite">Leite</string>
+    <string name="categoria_massa">Massas</string>
     <string name="categoria_paes">Pães</string>
-    <string name="categoria_bolos">Bolos</string>
     <string name="categoria_queijo_frios">Queijo e frios</string>
     <string name="categoria_salgadinhos">Salgadinhos</string>
     <string name="categoria_outros">Outros</string>

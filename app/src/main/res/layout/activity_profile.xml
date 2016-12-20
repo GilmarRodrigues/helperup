@@ -39,7 +39,7 @@
                     android:layout_height="200dp"
                     android:layout_margin="6dp"
                     android:background="#d9d9d5"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_perfil_white" />
 
                 <ProgressBar
