@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.activity.CategoriasActivity;
 import br.com.alimentar.alergia.model.Tabelas;
@@ -24,6 +26,8 @@ public class CategoriaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mCategorias = Tabelas.addCategorias(getActivity());
+
+        mCategorias = carregaLista();
 
         View view = inflater.inflate(R.layout.fragment_categoria, container, false);
 
@@ -46,6 +50,15 @@ public class CategoriaFragment extends Fragment {
                 startActivity(intent);
             }
         };
+    }
+
+    private String[] carregaLista() {
+        String categorias[] = new String[mCategorias.length-1];
+        for (int i = 0; i < mCategorias.length; i++) {
+            if (i+1 < mCategorias.length)
+            categorias[i] = mCategorias[i + 1];
+        }
+        return categorias;
     }
 
 }

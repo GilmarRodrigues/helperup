@@ -1,5 +1,6 @@
 package br.com.alimentar.alergia.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -179,13 +180,21 @@ public class ProfileActivity extends BaseActivity {
             public void onBottomSheet(Uri imagem, boolean flag) {
 
                 if (imagem != null) {
-                    carregaImagem(iv_perfil, imagem.toString());
+                    //carregaImagem(iv_perfil, imagem.toString());
                     try {
                         File actualImage = FileUtil.from(ProfileActivity.this, imagem);
-                        iv_perfil.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
+                        actualImage.getAbsolutePath();
+                        //Testando bitmap
+                        Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
+                        bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+                        iv_perfil.setImageBitmap(bitmap);
+                        //fim teste
+
+                        //iv_perfil.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
                         actualImage = Compressor.getDefault(ProfileActivity.this).compressToFile(actualImage);
                         mImagemUri = Uri.fromFile(actualImage);
                         updateImage(mImagemUri);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -2,6 +2,7 @@ package br.com.alimentar.alergia.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +44,6 @@ import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CustomBottomSheetDialogFragment;
 import br.com.alimentar.alergia.model.Produto;
 import br.com.alimentar.alergia.model.Tabelas;
-import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.validator.ProdutoValidator;
 import br.com.alimentar.alergia.view.CustomAutoCompleteTextView;
@@ -52,13 +51,6 @@ import br.com.alimentar.alergia.view.CustomEditText;
 import id.zelory.compressor.Compressor;
 import id.zelory.compressor.FileUtil;
 
-import java.util.Calendar;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import static android.R.attr.data;
-import static android.R.attr.key;
 import static br.com.alimentar.alergia.R.id.edit_codigo_barra;
 import static br.com.alimentar.alergia.R.id.fab;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
@@ -148,12 +140,16 @@ public class RegisterProdutoActivity extends BaseActivity {
                     public void onBottomSheet(Uri imagem, boolean flag) {
 
                         if (imagem != null) {
-                            carregaImagem(iv_produto, imagem.toString());
+                            //carregaImagem(iv_produto, imagem.toString());
                             try {
                                 File actualImage = FileUtil.from(RegisterProdutoActivity.this, imagem);
-                                iv_produto.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
+                                //iv_produto.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
                                 actualImage = Compressor.getDefault(RegisterProdutoActivity.this).compressToFile(actualImage);
                                 mImagemUri = Uri.fromFile(actualImage);
+
+                                Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
+                                bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+                                iv_produto.setImageBitmap(bitmap);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -190,7 +186,7 @@ public class RegisterProdutoActivity extends BaseActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             mProdutoKey = dataSnapshot.getKey();
-                            if(flag) {
+                            if (flag) {
                                 for (DataSnapshot produto : dataSnapshot.getChildren()) {
                                     if (codigo_barra.equals(produto.child("codigo_barra").getValue(String.class))) {
                                         flag = false;
@@ -250,7 +246,7 @@ public class RegisterProdutoActivity extends BaseActivity {
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Log.i(TAG,"onActivityResult:Cancelled");
+                Log.i(TAG, "onActivityResult:Cancelled");
             } else {
                 mDatabase.addValueEventListener(new ValueEventListener() {
                     @Override
