@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -55,6 +57,7 @@ public class ViewProdutoActivity extends BaseActivity {
     private List<String> mAlergenicos;
     private String key = null;
     private FloatingActionButton fab;
+    private AppBarLayout appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,19 @@ public class ViewProdutoActivity extends BaseActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(onClickRemove());
+
+        appbar = (AppBarLayout) findViewById(R.id.app_bar);
+        //final float heightDp = getResources().getDisplayMetrics().heightPixels / ((float)1.5);
+        //final CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appbar.getLayoutParams();
+        appbar.setOnClickListener(onCLickExpandirImagem());
+        /*appbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appbar.setExpanded(true, true);
+                lp.height = (int)heightDp;
+            }
+        });*/
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -129,6 +145,19 @@ public class ViewProdutoActivity extends BaseActivity {
             }
         });
 
+    }
+
+    // Expandir Imagem
+    private View.OnClickListener onCLickExpandirImagem() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final float heightDp = getResources().getDisplayMetrics().heightPixels / ((float)1.5);
+                final CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appbar.getLayoutParams();
+                appbar.setExpanded(true, false);
+                lp.height = (int)heightDp;
+            }
+        };
     }
 
     private View.OnClickListener onClickRemove() {

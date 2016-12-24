@@ -6,11 +6,11 @@
     <string name="activity_login">Fazer login</string>
     <string name="activity_register">Criar uma conta gratuita</string>
     <string name="activity_profile">Perfil</string>
-    <string name="activity_substancias">Alérgenos</string>
+    <string name="activity_substancias">Cadastro de Alergênicos</string>
     <string name="activity_recuperar_senha">Recuperar Senha</string>
     <string name="activity_settings">Configurações</string>
     <string name="title_activity_register_produto"></string>
-    <string name="title_activity_view_produto">ViewProdutoActivity</string>
+    <string name="title_activity_view_produto">Cadastro de Alergênicos</string>
     <string name="title_activity_categorias">Categoria</string>
 
     <!-- Botões -->
