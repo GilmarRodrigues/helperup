@@ -40,7 +40,7 @@ public class Tabelas {
 
     public static String[] addCategorias(Context context) {
         String[] categorias = new String[]{context.getString(R.string.categoria_selecione_item), context.getString(R.string.categoria_bebidas), context.getString(R.string.categoria_biscoitos),
-                context.getString(R.string.categoria_bolos), context.getString(R.string.categoria_congelados), context.getString(R.string.categoria_doces_sobremesas),
+                context.getString(R.string.categoria_bolos), context.getString(R.string.categoria_achocolatado), context.getString(R.string.categoria_congelados), context.getString(R.string.categoria_doces_sobremesas),
                 context.getString(R.string.categoria_enlatados), context.getString(R.string.categoria_graos_cereais), context.getString(R.string.categoria_iogute),
                 context.getString(R.string.categoria_leite), context.getString(R.string.categoria_massa),context.getString(R.string.categoria_paes),
                 context.getString(R.string.categoria_queijo_frios), context.getString(R.string.categoria_salgadinhos), context.getString(R.string.categoria_outros)};
