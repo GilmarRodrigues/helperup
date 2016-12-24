@@ -7,8 +7,8 @@ android {
         applicationId "br.com.alimentar.alergia"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 7
-        versionName "0.4.3"
+        versionCode 8
+        versionName "0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

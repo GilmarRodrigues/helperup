@@ -54,6 +54,7 @@ import id.zelory.compressor.FileUtil;
 import static br.com.alimentar.alergia.R.id.edit_codigo_barra;
 import static br.com.alimentar.alergia.R.id.fab;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
+import static br.com.alimentar.alergia.validator.ProdutoValidator.verificarCodigoBarraFirebase;
 
 
 public class RegisterProdutoActivity extends BaseActivity {
@@ -169,10 +170,37 @@ public class RegisterProdutoActivity extends BaseActivity {
         final String codigo_barra = campo_codigo_barra.getText().toString().trim();
 
         if (!validator()) {
+            ProdutoValidator.verificarCodigoBarraFirebase(mDatabase, campo_codigo_barra, this, campo_codigo_barra.getText().toString().trim(), TAG, new ProdutoValidator.Callback() {
+                @Override
+                public void onVerificarCodigoBarraFirebase(boolean flag) {
+                    if(flag) {
+                        showProgressDialog(R.string.msg_salvando_produto);
 
-            showProgressDialog(R.string.msg_salvando_produto);
+                        StorageReference filepath = mStorage.child(Tabelas.IMAGEM_PRODUTO).child(mImagemUri.getLastPathSegment());
+                        filepath.putFile(mImagemUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-            StorageReference filepath = mStorage.child(Tabelas.IMAGEM_PRODUTO).child(mImagemUri.getLastPathSegment());
+                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+                                Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid(), Tabelas.addSubstancias(getBaseContext()));
+                                Intent mainIntent = new Intent(RegisterProdutoActivity.this, RegisterSubstanciaProdutoActivity.class);
+                                mainIntent.putExtra(Produto.KEY, produto);
+                                startActivity(mainIntent);
+                                AndroidUtils.closeVirtualKeyboard(RegisterProdutoActivity.this, campo_nome);
+
+                                hideProgressDialog();
+
+                            }
+                        });
+
+                    }
+                }
+            });
+
+            //showProgressDialog(R.string.msg_salvando_produto);
+
+            /*StorageReference filepath = mStorage.child(Tabelas.IMAGEM_PRODUTO).child(mImagemUri.getLastPathSegment());
             filepath.putFile(mImagemUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -237,11 +265,47 @@ public class RegisterProdutoActivity extends BaseActivity {
 
 
                 }
-            });
+            });*/
         }
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Log.i(TAG, "onActivityResult:Cancelled");
+            } else {
+                verificarCodigoBarraFirebase(mDatabase, campo_codigo_barra, this, result.getContents(), TAG, new ProdutoValidator.Callback() {
+                    @Override
+                    public void onVerificarCodigoBarraFirebase(boolean flag) {
+
+                    }
+                });
+                /*mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot produto : dataSnapshot.getChildren()) {
+                            if (result.getContents().equals(produto.child("codigo_barra").getValue(String.class))) {
+                                alertDialog(RegisterProdutoActivity.this, R.string.msg_produto_ja_existe, R.string.msg_produto_ja_possui_um_cadastro, onClickVaiParaRegisterProdutoActivity(produto.getKey()));
+                                break;
+                            }
+                        }
+                        campo_codigo_barra.setText(result.getContents());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                    }
+                });*/
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
@@ -273,7 +337,7 @@ public class RegisterProdutoActivity extends BaseActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
+    }*/
 
     private AndroidUtils.onClickPositivo onClickVaiParaRegisterProdutoActivity(final String key) {
         return new AndroidUtils.onClickPositivo() {

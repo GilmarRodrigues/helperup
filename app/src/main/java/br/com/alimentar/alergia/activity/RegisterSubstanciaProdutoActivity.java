@@ -2,6 +2,7 @@ package br.com.alimentar.alergia.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -63,6 +64,20 @@ public class RegisterSubstanciaProdutoActivity extends BaseActivity {
 
         if (mSubstanciasSwitch.size() > 0) {
             showProgressDialog(R.string.msg_salvando_alergenicos);
+            Produto produto = new Produto(mProduto.nome, mProduto.fabricatente, mProduto.codigo_barra, mProduto.categoria, mProduto.imagem, mProduto.data, mProduto.status, mProduto.uid_user, mSubstanciasSwitch);
+            mDatabaseProduto.push().setValue(produto);
+
+            Toast.makeText(RegisterSubstanciaProdutoActivity.this, getString(R.string.msg_produto_salvo), Toast.LENGTH_SHORT).show();
+
+            Intent mainIntent = new Intent(RegisterSubstanciaProdutoActivity.this, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainIntent);
+
+            hideProgressDialog();
+        }
+
+       /* if (mSubstanciasSwitch.size() > 0) {
+            showProgressDialog(R.string.msg_salvando_alergenicos);
 
             mDatabaseProduto.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -94,7 +109,7 @@ public class RegisterSubstanciaProdutoActivity extends BaseActivity {
                 }
             });
             hideProgressDialog();
-        }
+        }*/
     }
 
     private SubstanciasAdapter.OnClickSwitch onClickSwitch() {
