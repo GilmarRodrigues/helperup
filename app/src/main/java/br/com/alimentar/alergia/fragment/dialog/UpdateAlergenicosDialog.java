@@ -58,6 +58,7 @@ public class UpdateAlergenicosDialog extends BaseDialog {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getDialog().setTitle(R.string.title_atualizar_alergenicos);
         View view = inflater.inflate(R.layout.dialog_update_alergenicos, container, false);
 
         mAuth = FirebaseAuth.getInstance();

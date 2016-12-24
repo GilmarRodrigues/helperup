@@ -12,6 +12,8 @@
     <string name="title_activity_register_produto"></string>
     <string name="title_activity_view_produto">Cadastro de Alergênicos</string>
     <string name="title_activity_categorias">Categoria</string>
+    <string name="title_atualizar_alergenicos">Atualizar alergênicos</string>
+    <string name="title_atualizar_nome">Atualizar nome</string>
 
     <!-- Botões -->
     <string name="btn_sign_in">ENTRAR</string>
