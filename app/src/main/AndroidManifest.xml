@@ -87,10 +87,10 @@
 
         <activity
             android:name=".activity.ViewProdutoActivity"
-            android:label="@string/title_activity_view_produto"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.RegisterSubstanciaProdutoActivity" />
+        <activity android:name=".activity.RegisterSubstanciaProdutoActivity"
+            android:label="@string/title_activity_view_produto"/>
 
         <activity android:name=".activity.CategoriasActivity"
             android:label="@string/title_activity_categorias"
