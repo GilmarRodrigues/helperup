@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ import java.io.File;
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.adapter.ItemAdapter;
 import br.com.alimentar.alergia.utils.SDCardUtils;
-
-import static android.R.attr.data;
 
 /**
  * Created by gilmar on 24/10/16.

@@ -51,6 +51,7 @@ import br.com.alimentar.alergia.view.CustomEditText;
 import id.zelory.compressor.Compressor;
 import id.zelory.compressor.FileUtil;
 
+import static br.com.alimentar.alergia.R.id.centerCrop;
 import static br.com.alimentar.alergia.R.id.edit_codigo_barra;
 import static br.com.alimentar.alergia.R.id.fab;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
@@ -141,16 +142,17 @@ public class RegisterProdutoActivity extends BaseActivity {
                     public void onBottomSheet(Uri imagem, boolean flag) {
 
                         if (imagem != null) {
-                            //carregaImagem(iv_produto, imagem.toString());
+                            carregaImagem(iv_produto, imagem.toString());
                             try {
                                 File actualImage = FileUtil.from(RegisterProdutoActivity.this, imagem);
                                 //iv_produto.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
                                 actualImage = Compressor.getDefault(RegisterProdutoActivity.this).compressToFile(actualImage);
                                 mImagemUri = Uri.fromFile(actualImage);
 
-                                Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
+                                /*Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
                                 bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
                                 iv_produto.setImageBitmap(bitmap);
+                                iv_produto.setScaleType(ImageView.ScaleType.FIT_XY);*/
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
