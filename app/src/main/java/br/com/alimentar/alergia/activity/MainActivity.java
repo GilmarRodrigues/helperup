@@ -122,7 +122,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mDatabase.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    final User user = dataSnapshot.getValue(User.class);
+                    tv_nome.setText((String) dataSnapshot.child("nome").getValue());
+                    tv_email.setText((String) dataSnapshot.child("email").getValue());
+
+                    String imagem = (String) dataSnapshot.child("imagem").getValue();
+                    if (imagem != Tabelas.DEFAULT) {
+                        carregaImagem(iv_perfil, imagem, progressBar);
+                    }
+                    /*final User user = dataSnapshot.getValue(User.class);
                     tv_nome.setText(user.nome);
                     tv_email.setText(user.email);
 
@@ -130,7 +137,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         carregaImagem(iv_perfil, user.imagem, progressBar);
                     } else {
                         Log.i(TAG, "Foto: " + user.imagem);
-                    }
+                    }*/
                 }
 
                 @Override
