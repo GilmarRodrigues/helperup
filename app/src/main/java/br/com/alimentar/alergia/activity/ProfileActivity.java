@@ -180,14 +180,14 @@ public class ProfileActivity extends BaseActivity {
             public void onBottomSheet(Uri imagem, boolean flag) {
 
                 if (imagem != null) {
-                    carregaImagem(iv_perfil, imagem.toString());
+                    //carregaImagem(iv_perfil, imagem.toString());
                     try {
                         File actualImage = FileUtil.from(ProfileActivity.this, imagem);
                         actualImage.getAbsolutePath();
                         //Testando bitmap
-                        /*Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
+                        Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
                         bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-                        iv_perfil.setImageBitmap(bitmap);*/
+                        iv_perfil.setImageBitmap(bitmap);
                         //fim teste
 
                         //iv_perfil.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));

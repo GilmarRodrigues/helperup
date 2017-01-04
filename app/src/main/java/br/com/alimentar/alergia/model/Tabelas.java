@@ -47,8 +47,4 @@ public class Tabelas {
         return categorias;
     }
 
-    public static String[] addFabricantes(Context context) {
-        String[] fabricantes = new String[]{context.getString(R.string.fabrica_a_saborosa), context.getString(R.string.fabrica_a_tal_da_castanha), context.getString(R.string.fabrica_a_vaca_que_ri), context.getString(R.string.fabrica_abbott), context.getString(R.string.fabrica_activeslim), context.getString(R.string.fabrica_activia), context.getString(R.string.fabrica_adams), context.getString(R.string.fabrica_adaptogen), context.getString(R.string.fabrica_ades), context.getString(R.string.fabrica_adocyl),context.getString(R.string.fabrica_adria), context.getString(R.string.fabrica_advanced_nutrition), context.getString(R.string.fabrica_agreco), context.getString(R.string.fabrica_agro_nippo), context.getString(R.string.fabrica_agtal), context.getString(R.string.fabrica_aguia), context.getString(R.string.fabrica_aida), context.getString(R.string.fabrica_ailiram)};
-        return fabricantes;
-    }
 }

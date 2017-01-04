@@ -2,10 +2,12 @@ package br.com.alimentar.alergia.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
@@ -34,11 +36,17 @@ import com.google.firebase.storage.UploadTask;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CustomBottomSheetDialogFragment;
@@ -72,8 +80,8 @@ public class RegisterProdutoActivity extends BaseActivity {
     private DatabaseReference mDatabaseUser;
     private int mPositionSelectorCategoria = 0;
     private String mCategorias[] = null;
-    private String mFabricas[] = null;
     private String mProdutoKey;
+    private Produto produto;
 
 
     @Override
@@ -113,6 +121,12 @@ public class RegisterProdutoActivity extends BaseActivity {
             campo_codigo_barra.setText(codigo_barra);
         }
 
+        /*if (savedInstanceState != null) {
+            produto = savedInstanceState.getParcelable(Produto.KEY);
+
+            carregaImagem(iv_produto, produto.imagem);
+        }*/
+
     }
 
     private View.OnClickListener onClickScanner() {
@@ -142,17 +156,17 @@ public class RegisterProdutoActivity extends BaseActivity {
                     public void onBottomSheet(Uri imagem, boolean flag) {
 
                         if (imagem != null) {
-                            carregaImagem(iv_produto, imagem.toString());
+                            //carregaImagem(iv_produto, imagem.toString());
                             try {
                                 File actualImage = FileUtil.from(RegisterProdutoActivity.this, imagem);
                                 //iv_produto.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
                                 actualImage = Compressor.getDefault(RegisterProdutoActivity.this).compressToFile(actualImage);
                                 mImagemUri = Uri.fromFile(actualImage);
 
-                                /*Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
+                                Bitmap bitmap = BitmapFactory.decodeFile(actualImage.getAbsolutePath());
                                 bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
                                 iv_produto.setImageBitmap(bitmap);
-                                iv_produto.setScaleType(ImageView.ScaleType.FIT_XY);*/
+                                iv_produto.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -165,6 +179,12 @@ public class RegisterProdutoActivity extends BaseActivity {
         };
     }
 
+    /*@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable(Produto.KEY, new Produto());
+    }*/
 
     private void ckeckProduto() {
         final String nome = campo_nome.getText().toString().trim();
@@ -200,74 +220,6 @@ public class RegisterProdutoActivity extends BaseActivity {
                 }
             });
 
-            //showProgressDialog(R.string.msg_salvando_produto);
-
-            /*StorageReference filepath = mStorage.child(Tabelas.IMAGEM_PRODUTO).child(mImagemUri.getLastPathSegment());
-            filepath.putFile(mImagemUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                    final Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    final DatabaseReference newProduto = mDatabase.push();
-
-                    mDatabase.addValueEventListener(new ValueEventListener() {
-                        public boolean flag = true;
-
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mProdutoKey = dataSnapshot.getKey();
-                            if (flag) {
-                                for (DataSnapshot produto : dataSnapshot.getChildren()) {
-                                    if (codigo_barra.equals(produto.child("codigo_barra").getValue(String.class))) {
-                                        flag = false;
-                                        alertDialog(RegisterProdutoActivity.this, R.string.msg_produto_ja_existe, R.string.msg_produto_ja_possui_um_cadastro, onClickVaiParaRegisterProdutoActivity(produto.getKey()));
-                                        hideProgressDialog();
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (flag) {
-                                mDatabaseUser.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(final DataSnapshot dataSnapshot) {
-                                        final Produto produto = new Produto(nome, fabricante, codigo_barra, mCategorias[mPositionSelectorCategoria], downloadUrl.toString(), dataAtual(), "true", mCurrentUser.getUid(), Tabelas.addSubstancias(getBaseContext()));
-                                        newProduto.setValue(produto).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    hideProgressDialog();
-
-                                                    Intent mainIntent = new Intent(RegisterProdutoActivity.this, RegisterSubstanciaProdutoActivity.class);
-                                                    mainIntent.putExtra(Produto.KEY, produto);
-                                                    startActivity(mainIntent);
-                                                    AndroidUtils.closeVirtualKeyboard(RegisterProdutoActivity.this, campo_nome);
-                                                } else {
-                                                    hideProgressDialog();
-                                                }
-                                            }
-                                        });
-                                        flag = false;
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Log.e(TAG, databaseError.getMessage());
-                                    }
-                                });
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Log.e(TAG, databaseError.getMessage());
-                        }
-                    });
-
-
-                }
-            });*/
         }
     }
 
@@ -284,73 +236,12 @@ public class RegisterProdutoActivity extends BaseActivity {
 
                     }
                 });
-                /*mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot produto : dataSnapshot.getChildren()) {
-                            if (result.getContents().equals(produto.child("codigo_barra").getValue(String.class))) {
-                                alertDialog(RegisterProdutoActivity.this, R.string.msg_produto_ja_existe, R.string.msg_produto_ja_possui_um_cadastro, onClickVaiParaRegisterProdutoActivity(produto.getKey()));
-                                break;
-                            }
-                        }
-                        campo_codigo_barra.setText(result.getContents());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                    }
-                });*/
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Log.i(TAG, "onActivityResult:Cancelled");
-            } else {
-                mDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        boolean flag = true;
-                        for (DataSnapshot produto : dataSnapshot.getChildren()) {
-                            if (result.getContents().equals(produto.child("codigo_barra").getValue(String.class))) {
-                                flag = false;
-                                alertDialog(RegisterProdutoActivity.this, R.string.msg_produto_ja_existe, R.string.msg_produto_ja_possui_um_cadastro, onClickVaiParaRegisterProdutoActivity(produto.getKey()));
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            campo_codigo_barra.setText(result.getContents());
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                    }
-                });
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }*/
-
-    private AndroidUtils.onClickPositivo onClickVaiParaRegisterProdutoActivity(final String key) {
-        return new AndroidUtils.onClickPositivo() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(RegisterProdutoActivity.this, ViewProdutoActivity.class);
-                intent.putExtra("key", key);
-                startActivity(intent);
-            }
-        };
-    }
 
     private boolean validator() {
         campo_nome.setError(null);
@@ -410,8 +301,7 @@ public class RegisterProdutoActivity extends BaseActivity {
     }
 
     private void setAutoCompleteFabrica() {
-        mFabricas = Tabelas.addFabricantes(getBaseContext());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, mFabricas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, fabricantes());
         campo_fabricante.setAdapter(adapter);
     }
 
@@ -420,11 +310,31 @@ public class RegisterProdutoActivity extends BaseActivity {
         Date date = c.getTime();
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String data = fmt.format(date);
-
-        //Locale brasil = new Locale("pt", "BR");
-        //DateFormat f2 = DateFormat.getDateInstance(DateFormat.FULL, brasil);
-        //String data = f2.format(date);
         return data;
     }
 
+    // pega de txt e preenche as empresas autocomple
+    private List<String> fabricantes() {
+        List<String> list= new ArrayList<>();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(getAssets().open("empresas"), "UTF-8"));
+
+            String mLine;
+            while ((mLine = reader.readLine()) != null) {
+                list.add(mLine.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
 }
