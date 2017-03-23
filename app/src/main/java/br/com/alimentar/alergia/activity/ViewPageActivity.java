@@ -28,7 +28,7 @@ public class ViewPageActivity extends BaseActivity implements ViewPager.OnPageCh
             R.drawable.art_canteen_intro1,
             R.drawable.art_canteen_intro2,
             R.drawable.art_canteen_intro3,
-            R.drawable.art_canteen_intro2
+            R.drawable.art_canteen_intro4
     };
     private int[] mTitles = {R.string.title_canteen_intro1, R.string.title_canteen_intro2, R.string.title_canteen_intro3, R.string.title_canteen_intro4};
     private int[] mDescriprion = {R.string.description_canteen_intro1, R.string.description_canteen_intro2, R.string.description_canteen_intro3, R.string.description_canteen_intro4};

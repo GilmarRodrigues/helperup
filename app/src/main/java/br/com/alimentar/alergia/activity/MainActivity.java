@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,10 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
+//import com.google.android.gms.appindexing.Action;
+//import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +41,6 @@ import br.com.alimentar.alergia.R;
 import br.com.alimentar.alergia.fragment.CategoriaFragment;
 import br.com.alimentar.alergia.fragment.HomeFragment;
 import br.com.alimentar.alergia.model.Tabelas;
-import br.com.alimentar.alergia.model.User;
 import br.com.alimentar.alergia.utils.AndroidUtils;
 import br.com.alimentar.alergia.view.RoundedImageView;
 
@@ -45,7 +49,7 @@ import static br.com.alimentar.alergia.R.id.nav_categoria;
 import static br.com.alimentar.alergia.R.id.nav_configuracoes;
 import static br.com.alimentar.alergia.utils.AndroidUtils.alertDialog;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
@@ -93,7 +97,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         setFirstItemNavigationView(navigationView);
 
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        // [END config_signin]
+
+        client = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
     }
 
     @Override
@@ -126,8 +139,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     tv_email.setText((String) dataSnapshot.child("email").getValue());
 
                     String imagem = (String) dataSnapshot.child("imagem").getValue();
-                    if (imagem != Tabelas.DEFAULT) {
-                        carregaImagem(iv_perfil, imagem, progressBar);
+                    if (imagem != null) {
+                        if (!imagem.equals(Tabelas.DEFAULT)) {
+                            carregaImagem(iv_perfil, imagem, progressBar);
+                        }
                     }
                     /*final User user = dataSnapshot.getValue(User.class);
                     tv_nome.setText(user.nome);
@@ -154,13 +169,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         client.connect();
         mAuth.addAuthStateListener(mAuthListener);
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+        //AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        //AppIndex.AppIndexApi.end(client, getIndexApiAction());
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
@@ -261,7 +276,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_drawer_cotainer, frag, "TAG").commit();
     }
 
-    public Action getIndexApiAction() {
+    /*public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Main Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
@@ -270,7 +285,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .setObject(object)
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
                 .build();
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -320,4 +335,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         };
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -121,13 +121,13 @@
 
 
     <!-- Intro -->
-    <string name="title_canteen_intro1" translatable="false">Menus right on your screen</string>
-    <string name="title_canteen_intro2" translatable="false">Cash on delivery</string>
-    <string name="title_canteen_intro3" translatable="false">Choose what you like</string>
-    <string name="title_canteen_intro4" translatable="false">Teste</string>
-    <string name="description_canteen_intro1" translatable="false">Você encontra dificuldade para ler o rótulo dos produtos?</string>
-    <string name="description_canteen_intro2" translatable="false">Possui alergia a alguma substância, ou simplismente quer levar uma vida mais saúdavel sabendo o que consome?</string>
-    <string name="description_canteen_intro3" translatable="false">Apresentamos a você o help UP, uma plataforma colaborativa para compartilhamento de informações de produtos alimentícios industrializado no Brasil..</string>
+    <string name="title_canteen_intro1" translatable="false">Rótulos confusos?</string>
+    <string name="title_canteen_intro2" translatable="false">Riscos para sua Saúde?</string>
+    <string name="title_canteen_intro3" translatable="false">Conheça o HelpUP!</string>
+    <string name="title_canteen_intro4" translatable="false">Aproveite a comunidade!</string>
+    <string name="description_canteen_intro1" translatable="false">Você encontra dificuldades para ler o rótulo dos produtos?</string>
+    <string name="description_canteen_intro2" translatable="false">Possui alergia a alguma substância, ou simplesmente quer levar uma vida mais saudável sabendo o que consome?</string>
+    <string name="description_canteen_intro3" translatable="false">Apresentamos a vocês o help UP, uma plataforma colaborativa para compartilhamento de informações de produtos alimentícios industrializados no Brasil.</string>
     <string name="description_canteen_intro4" translatable="false">Com o help UP, você poderá consultar substâncias dos produtos, cadastra-los e muito mais. Entre nessa comunidade e faça com que o help UP possa ajudar muito mais pessoas! A sua colaboração é muito bem vinda! :D</string>
     <string name="label_button_cta_canteen_intro" translatable="false">Get started</string>
 
