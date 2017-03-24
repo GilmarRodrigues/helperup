@@ -108,7 +108,7 @@ public class ProfileActivity extends BaseActivity {
         iv_perfil = (ImageView) findViewById(R.id.iv_perfil);
         mLLAlergenicos = (LinearLayout) findViewById(R.id.llt_alergenicos);
 
-        mDatabaseUser.child(key_uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseUser.child(key_uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mUser = dataSnapshot.getValue(User.class);

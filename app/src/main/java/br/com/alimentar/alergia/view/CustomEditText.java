@@ -13,7 +13,7 @@ import br.com.alimentar.alergia.R;
  * Created by gilmar on 10/10/16.
  */
 
-public class CustomEditText extends EditText {
+public class CustomEditText extends android.support.v7.widget.AppCompatEditText {
     private Context context;
     private AttributeSet attrs;
     private OnClickKeyPreItem onClickKeyPreItem;

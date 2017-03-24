@@ -20,7 +20,7 @@ import br.com.alimentar.alergia.R;
  * Created by gilmar on 15/10/16.
  */
 
-public class RoundedImageView extends ImageView {
+public class RoundedImageView extends android.support.v7.widget.AppCompatImageView {
 
     private int borderWidth;
     private int canvasSize;

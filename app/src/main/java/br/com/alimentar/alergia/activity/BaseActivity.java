@@ -160,7 +160,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void showProgressDialog(int mensagem) {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(new ContextThemeWrapper(this, R.style.AppTheme));
+            mProgressDialog = new ProgressDialog(new ContextThemeWrapper(this, R.style.AppTheme);
             mProgressDialog.setTitle(getString(R.string.aguarde));
             mProgressDialog.setMessage(getString(mensagem));
             mProgressDialog.setIndeterminate(true);

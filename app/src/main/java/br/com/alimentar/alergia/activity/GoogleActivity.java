@@ -150,6 +150,8 @@ public class GoogleActivity extends BaseActivity {
                                 task.getResult().getUser().getEmail(),
                                 task.getResult().getUser().getPhotoUrl().toString(),
                                 Tabelas.addSubstancias(getBaseContext()));
+                        DatabaseReference current_user_db = mDatabaseUsuario.child(user_id);
+                        current_user_db.setValue(user);
 
                         Intent mainIntent = new Intent(GoogleActivity.this, RegisterSubstanciasUserActivity.class);
                         mainIntent.putExtra(User.KEY, user);

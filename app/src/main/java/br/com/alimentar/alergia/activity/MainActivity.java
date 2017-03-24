@@ -139,8 +139,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     tv_email.setText((String) dataSnapshot.child("email").getValue());
 
                     String imagem = (String) dataSnapshot.child("imagem").getValue();
-                    if (imagem != null) {
-                        if (!imagem.equals(Tabelas.DEFAULT)) {
+                    Log.i("Script", "imagem " + imagem);
+                    if (imagem != null ) {
+                        if (imagem != Tabelas.DEFAULT) {
                             carregaImagem(iv_perfil, imagem, progressBar);
                         }
                     }

@@ -9,7 +9,7 @@ import android.widget.AutoCompleteTextView;
  * Created by gilmar on 20/10/16.
  */
 
-public class CustomAutoCompleteTextView extends AutoCompleteTextView {
+public class CustomAutoCompleteTextView extends android.support.v7.widget.AppCompatAutoCompleteTextView {
     private Context context;
     private AttributeSet attrs;
     private CustomEditText.OnClickKeyPreItem onClickKeyPreItem;

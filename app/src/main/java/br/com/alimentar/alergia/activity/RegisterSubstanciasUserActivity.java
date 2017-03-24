@@ -54,12 +54,12 @@ public class RegisterSubstanciasUserActivity extends BaseActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
+                /*if (!mUser.imagem.equals(Tabelas.DEFAULT)) {
                     final String key = mAuth.getCurrentUser().getUid();
                     DatabaseReference current_user_db = mDatabaseUser.child(key);
                     User user = new User(mUser.nome, mUser.email, mUser.imagem, mSubstanciasSwitch);
                     current_user_db.setValue(user);
-                }
+                }*/
 
                 Intent mainIntent = new Intent(RegisterSubstanciasUserActivity.this, MainActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

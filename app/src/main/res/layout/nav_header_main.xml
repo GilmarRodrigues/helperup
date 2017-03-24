@@ -60,9 +60,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_build"
             android:tint="@android:color/white"
-            android:background="?attr/selectableItemBackground" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
